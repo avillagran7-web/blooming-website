@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooming — Growth that matters</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --negro: #1A1A1A;
+      --blanco: #FFFFFF;
+      --bosque: #5C6B5A;
+      --tierra: #8B7D6B;
+      --hongo: #9E8E80;
+      --cream: #F7F5F1;
+      --cream-dark: #EDECEA;
+    }
+
+    @page {
+      size: 11in 8.5in;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--negro);
+      background: var(--cream);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .slide {
+      width: 11in;
+      height: 8.5in;
+      padding: 1in 1.2in;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      page-break-after: always;
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+    }
+
+    /* Typography */
+    .display {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    .sans {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+    }
+
+    .uppercase {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    /* Logo symbol */
+    .logo-symbol {
+      display: inline-block;
+    }
+
+    /* Decorative line */
+    .line {
+      width: 40px;
+      height: 1px;
+      background: var(--bosque);
+      opacity: 0.6;
+    }
+
+    /* Footer on each slide */
+    .slide-footer {
+      position: absolute;
+      bottom: 0.6in;
+      left: 1.2in;
+      right: 1.2in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slide-footer span {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra);
+    }
+
+    /* ========================
+       SLIDE 1 — Cover
+       ======================== */
+    .slide-cover {
+      justify-content: space-between;
+      padding-top: 1.2in;
+      padding-bottom: 1in;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cover-wordmark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--negro);
+    }
+
+    .cover-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cover-tagline {
+      font-size: 4.2rem;
+      line-height: 1.05;
+      color: var(--negro);
+    }
+
+    .cover-tagline em {
+      font-style: italic;
+      color: var(--bosque);
+    }
+
+    .cover-cities {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-top: 8px;
+    }
+
+    /* ========================
+       SLIDE 2 — Who
+       ======================== */
+    .slide-who {
+      gap: 48px;
+    }
+
+    .who-headline {
+      font-size: 2.8rem;
+      line-height: 1.15;
+      max-width: 7.5in;
+    }
+
+    .who-body {
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 6in;
+      color: var(--negro);
+      opacity: 0.75;
+    }
+
+    .who-traction {
+      display: flex;
+      gap: 64px;
+      margin-top: 8px;
+    }
+
+    .who-traction-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .who-traction-item .number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--negro);
+      line-height: 1;
+    }
+
+    .who-traction-item .label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra);
+    }
+
+    .who-values {
+      display: flex;
+      gap: 40px;
+      margin-top: 12px;
+    }
+
+    .who-values span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--bosque);
+    }
+
+    .who-values .dot {
+      font-style: normal;
+      color: var(--tierra);
+      opacity: 0.4;
+      font-size: 1rem;
+      align-self: center;
+    }
+
+    /* ========================
+       SLIDE 3 — What we do
+       ======================== */
+    .slide-what {
+      gap: 56px;
+    }
+
+    .what-label {
+      color: var(--tierra);
+    }
+
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 60px;
+    }
+
+    .what-item {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .what-item h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      color: var(--negro);
+    }
+
+    .what-item p {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      font-weight: 300;
+      color: var(--negro);
+      opacity: 0.65;
+    }
+
+    .what-number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--tierra);
+      opacity: 0.5;
+    }
+
+    /* ========================
+       SLIDE 4 — Reach
+       ======================== */
+    .slide-reach {
+      gap: 56px;
+    }
+
+    .reach-label {
+      color: var(--tierra);
+    }
+
+    .reach-main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .reach-headline {
+      font-size: 2.4rem;
+      line-height: 1.2;
+      max-width: 8in;
+    }
+
+    .reach-cities {
+      display: flex;
+      gap: 80px;
+    }
+
+    .reach-city {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .reach-city h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+      color: var(--negro);
+    }
+
+    .reach-city p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--negro);
+      opacity: 0.55;
+      line-height: 1.5;
+    }
+
+    .reach-connector {
+      width: 60px;
+      height: 1px;
+      background: var(--tierra);
+      opacity: 0.3;
+      align-self: center;
+      margin-top: 10px;
+    }
+
+    /* ========================
+       SLIDE 5 — Contact
+       ======================== */
+    .slide-contact {
+      align-items: center;
+      text-align: center;
+      gap: 36px;
+    }
+
+    .contact-headline {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      font-style: italic;
+      color: var(--bosque);
+    }
+
+    .contact-email {
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--negro);
+      opacity: 0.7;
+    }
+
+    .contact-url {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-top: 8px;
+    }
+
+    /* Screen-only helpers */
+    @media screen {
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 24px;
+        background: #d0cec9;
+      }
+      .slide {
+        box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+        border-radius: 2px;
+      }
+    }
+
+    /* Mobile responsive */
+    @media screen and (max-width: 900px) {
+      body {
+        padding: 12px;
+        gap: 12px;
+      }
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: 100svh;
+        padding: 48px 28px 80px;
+        page-break-after: unset;
+      }
+
+      /* Cover */
+      .slide-cover { padding-top: 48px; padding-bottom: 48px; gap: 32px; }
+      .cover-tagline { font-size: 2.6rem; }
+      .cover-cities { font-size: 0.65rem; }
+
+      /* Who */
+      .slide-who { gap: 28px; }
+      .who-headline { font-size: 1.6rem; max-width: 100%; }
+      .who-body { font-size: 0.9rem; max-width: 100%; }
+      .who-traction { gap: 28px; flex-wrap: wrap; }
+      .who-traction-item .number { font-size: 1.8rem; }
+      .who-values { gap: 20px; flex-wrap: wrap; }
+      .who-values span { font-size: 1.1rem; }
+
+      /* What we do */
+      .slide-what { gap: 32px; }
+      .what-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .what-item h3 { font-size: 1.35rem; }
+      .what-item p { font-size: 0.82rem; }
+
+      /* Reach */
+      .slide-reach { gap: 32px; }
+      .reach-headline { font-size: 1.6rem; max-width: 100%; }
+      .reach-cities {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .reach-connector {
+        width: 40px;
+        align-self: flex-start;
+      }
+      .reach-city h4 { font-size: 1.2rem; }
+      .reach-city p { font-size: 0.75rem; }
+
+      /* Contact */
+      .slide-contact { gap: 24px; }
+      .contact-headline { font-size: 2.2rem; }
+      .contact-email { font-size: 0.9rem; }
+
+      /* Footer */
+      .slide-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== SLIDE 1: COVER ====== -->
+  <div class="slide slide-cover">
+    <div class="cover-top">
+      <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="10" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+        <ellipse cx="30" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+        <ellipse cx="20" cy="10" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+        <ellipse cx="20" cy="30" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+      </svg>
+      <span class="cover-wordmark">Blooming</span>
+    </div>
+
+    <div class="cover-main">
+      <h1 class="display cover-tagline">Growth<br>that <em>matters.</em></h1>
+      <p class="cover-cities">San Francisco &nbsp;&middot;&nbsp; Santiago &nbsp;&middot;&nbsp; Paris</p>
+    </div>
+  </div>
+
+  <!-- ====== SLIDE 2: WHO ====== -->
+  <div class="slide slide-who">
+    <div class="line"></div>
+    <h2 class="display who-headline">We help organizations grow — through events, community, and go-to-market strategy.</h2>
+    <p class="sans who-body">
+      A collective of four bridging San Francisco, Latin America, and the French tech ecosystem. We work with AI and technology companies to build real traction where it counts.
+    </p>
+    <div class="who-traction">
+      <div class="who-traction-item">
+        <span class="number">50+</span>
+        <span class="label">Events produced</span>
+      </div>
+      <div class="who-traction-item">
+        <span class="number">70K+</span>
+        <span class="label">Attendees reached</span>
+      </div>
+      <div class="who-traction-item">
+        <span class="number">3</span>
+        <span class="label">Ecosystems connected</span>
+      </div>
+    </div>
+    <div class="who-values">
+      <span>Speed</span>
+      <span class="dot">&middot;</span>
+      <span>Quality</span>
+      <span class="dot">&middot;</span>
+      <span>Trust</span>
+    </div>
+
+    <div class="slide-footer">
+      <span>Blooming</span>
+      <span>weareblooming.co</span>
+    </div>
+  </div>
+
+  <!-- ====== SLIDE 3: WHAT WE DO ====== -->
+  <div class="slide slide-what">
+    <span class="uppercase what-label">What we do</span>
+    <div class="what-grid">
+      <div class="what-item">
+        <span class="what-number">01</span>
+        <div class="line"></div>
+        <h3>Event Production</h3>
+        <p>End-to-end design and execution of tech events — from intimate roundtables to large-scale conferences. Curated content, speakers, and experiences that drive real connections.</p>
+      </div>
+      <div class="what-item">
+        <span class="what-number">02</span>
+        <div class="line"></div>
+        <h3>Community Growth</h3>
+        <p>We build and nurture engaged communities around your brand. Recurring formats, thoughtful programming, and the kind of trust that turns attendees into advocates.</p>
+      </div>
+      <div class="what-item">
+        <span class="what-number">03</span>
+        <div class="line"></div>
+        <h3>Go-to-Market Strategy</h3>
+        <p>Strategic positioning for AI and tech companies entering new markets. We connect you with the right people, in the right rooms, at the right time.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>Blooming</span>
+      <span>weareblooming.co</span>
+    </div>
+  </div>
+
+  <!-- ====== SLIDE 4: REACH ====== -->
+  <div class="slide slide-reach">
+    <span class="uppercase reach-label">Where we operate</span>
+    <div class="reach-main">
+      <h2 class="display reach-headline">Three ecosystems,<br>one network.</h2>
+      <div class="reach-cities">
+        <div class="reach-city">
+          <h4>San Francisco</h4>
+          <p>The epicenter of AI.<br>Where builders ship and<br>communities form first.</p>
+        </div>
+        <div class="reach-connector"></div>
+        <div class="reach-city">
+          <h4>Santiago</h4>
+          <p>Latin America's fastest-growing<br>tech hub. A bridge to the<br>region's emerging talent.</p>
+        </div>
+        <div class="reach-connector"></div>
+        <div class="reach-city">
+          <h4>Paris</h4>
+          <p>Europe's AI capital.<br>Deep research roots and a<br>thriving startup ecosystem.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <span>Blooming</span>
+      <span>weareblooming.co</span>
+    </div>
+  </div>
+
+  <!-- ====== SLIDE 5: CONTACT ====== -->
+  <div class="slide slide-contact">
+    <svg width="56" height="56" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="10" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+      <ellipse cx="30" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+      <ellipse cx="20" cy="10" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+      <ellipse cx="20" cy="30" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.75" fill="none"/>
+    </svg>
+    <h2 class="display contact-headline">Let's connect.</h2>
+    <p class="contact-email">hello@weareblooming.co</p>
+    <p class="contact-url">weareblooming.co</p>
+
+    <div class="slide-footer">
+      <span>Blooming</span>
+      <span style="color: var(--bosque); opacity: 0.5;">Growth that matters</span>
+    </div>
+  </div>
+
+</body>
+</html>
