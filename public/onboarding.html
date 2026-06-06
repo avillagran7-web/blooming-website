@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooming — New Client Onboarding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --negro:  #1A1A1A;
+      --bosque: #5C6B5A;
+      --tierra: #8B7D6B;
+      --cream:  #FAF8F3;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--cream);
+      color: var(--negro);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(26,26,26,0.06);
+    }
+
+    .wordmark {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--negro);
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+    }
+
+    /* ── Progress ── */
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 72px;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--negro);
+      opacity: 0.25;
+      transition: opacity 0.3s, color 0.3s;
+      white-space: nowrap;
+    }
+
+    .progress-step.active   { opacity: 1; color: var(--bosque); }
+    .progress-step.done     { opacity: 0.45; }
+
+    .progress-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .progress-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(26,26,26,0.1);
+      margin: 0 16px;
+    }
+
+    /* ── Block ── */
+    .block { display: none; }
+    .block.active { display: block; animation: fadeIn 0.25s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .block-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-bottom: 14px;
+    }
+
+    .block-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--negro);
+      margin-bottom: 10px;
+    }
+
+    .block-sub {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--negro);
+      opacity: 0.45;
+      line-height: 1.65;
+      margin-bottom: 56px;
+    }
+
+    /* ── Question ── */
+    .question { margin-bottom: 44px; }
+
+    .q-label {
+      font-size: 0.93rem;
+      font-weight: 400;
+      color: var(--negro);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .q-hint {
+      font-size: 0.74rem;
+      font-weight: 300;
+      color: var(--negro);
+      opacity: 0.38;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .optional {
+      font-weight: 300;
+      opacity: 0.35;
+      font-size: 0.83rem;
+    }
+
+    /* ── Text inputs ── */
+    textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(26,26,26,0.18);
+      padding: 12px 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--negro);
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.6;
+    }
+
+    textarea:focus { border-bottom-color: var(--bosque); }
+    textarea::placeholder { color: rgba(26,26,26,0.22); }
+
+    /* ── Options ── */
+    .multi-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .options { display: flex; flex-direction: column; gap: 8px; }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 16px;
+      border: 1px solid rgba(26,26,26,0.09);
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      user-select: none;
+    }
+
+    .option:hover { border-color: rgba(92,107,90,0.35); background: rgba(92,107,90,0.025); }
+    .option.selected { border-color: var(--bosque); background: rgba(92,107,90,0.05); }
+
+    .indicator {
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(26,26,26,0.2);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: background 0.18s, border-color 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option.selected .indicator {
+      background: var(--bosque);
+      border-color: var(--bosque);
+    }
+
+    .indicator::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--cream);
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+
+    .option.selected .indicator::after { opacity: 1; }
+
+    /* checkbox variant */
+    .option.check .indicator { border-radius: 2px; }
+    .option.check.selected .indicator::after {
+      content: '✓';
+      width: auto; height: auto;
+      border-radius: 0;
+      background: transparent;
+      color: var(--cream);
+      font-size: 10px;
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .option-text {
+      font-size: 0.87rem;
+      font-weight: 300;
+      color: var(--negro);
+      line-height: 1.4;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(26,26,26,0.06);
+    }
+
+    .btn-back {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--negro);
+      opacity: 0.35;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-back:hover { opacity: 0.7; }
+    .btn-back.hidden { visibility: hidden; pointer-events: none; }
+
+    .btn-next {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--negro);
+      border: none;
+      padding: 14px 36px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-next:hover { background: var(--bosque); }
+
+    /* ── Confirmation ── */
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 80px 0 40px;
+    }
+
+    .confirmation.active { display: block; animation: fadeIn 0.4s ease; }
+
+    .conf-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--bosque);
+      margin: 28px 0 16px;
+    }
+
+    .conf-body {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--negro);
+      opacity: 0.5;
+      line-height: 1.75;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 580px) {
+      header { padding: 20px; }
+      .container { padding: 48px 20px 80px; }
+      .block-title { font-size: 1.9rem; }
+      .progress-step span { display: none; }
+      .progress-line { margin: 0 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="10" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+    <ellipse cx="30" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+    <ellipse cx="20" cy="10" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+    <ellipse cx="20" cy="30" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+  </svg>
+  <span class="wordmark">Blooming</span>
+</header>
+
+<div class="container">
+
+  <!-- Progress -->
+  <div class="progress" id="progress">
+    <div class="progress-step active" id="step-1">
+      <div class="progress-dot"></div>
+      <span>El problema</span>
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step" id="step-2">
+      <div class="progress-dot"></div>
+      <span>Objetivos</span>
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step" id="step-3">
+      <div class="progress-dot"></div>
+      <span>Constraints</span>
+    </div>
+  </div>
+
+  <!-- ══ BLOCK 1: El problema ══ -->
+  <div class="block active" id="block-1">
+    <p class="block-eyebrow">01 · El problema</p>
+    <h2 class="block-title">Cuéntanos<br>dónde estás.</h2>
+    <p class="block-sub">No hay respuestas correctas. Queremos entender tu contexto real antes de sentarnos contigo.</p>
+
+    <div class="question">
+      <p class="q-label">¿Cuál es el principal desafío que quieres resolver?</p>
+      <p class="q-hint">Sé específico — esta es la pregunta más importante del form.</p>
+      <textarea id="q1" rows="4" placeholder="Ej: Tenemos producto y clientes, pero no logramos escalar el canal de adquisición de forma predecible..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="q-label">¿Cuánto tiempo llevas enfrentando este problema?</p>
+      <div class="options" data-type="radio" id="q2">
+        <div class="option" data-value="menos-3">
+          <div class="indicator"></div>
+          <span class="option-text">Menos de 3 meses</span>
+        </div>
+        <div class="option" data-value="3-6">
+          <div class="indicator"></div>
+          <span class="option-text">3 a 6 meses</span>
+        </div>
+        <div class="option" data-value="6-12">
+          <div class="indicator"></div>
+          <span class="option-text">6 a 12 meses</span>
+        </div>
+        <div class="option" data-value="mas-1">
+          <div class="indicator"></div>
+          <span class="option-text">Más de un año</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <p class="q-label">¿Qué has intentado para resolverlo? <span class="optional">(opcional)</span></p>
+      <p class="q-hint">Nos ayuda a no proponer lo que ya no funcionó.</p>
+      <textarea id="q3" rows="3" placeholder="Ej: Contratamos un consultor, probamos paid ads, reestructuramos el equipo comercial..."></textarea>
+    </div>
+  </div>
+
+  <!-- ══ BLOCK 2: Objetivos ══ -->
+  <div class="block" id="block-2">
+    <p class="block-eyebrow">02 · Objetivos</p>
+    <h2 class="block-title">¿Hacia dónde<br>quieres ir?</h2>
+    <p class="block-sub">Queremos entender qué significa el éxito para ti — en tus propios términos.</p>
+
+    <div class="question">
+      <p class="q-label">¿Cuál es tu objetivo más importante en los próximos 12 meses?</p>
+      <p class="q-hint">Puede ser un número, un mercado, una posición — lo que sea real y concreto para ti.</p>
+      <textarea id="q4" rows="3" placeholder="Ej: Llegar a $500K ARR, lanzar en San Francisco, construir una comunidad de 1,000 usuarios activos..."></textarea>
+    </div>
+
+    <div class="question">
+      <p class="q-label">¿En qué área está tu mayor prioridad hoy?</p>
+      <p class="multi-label">Elige hasta 2</p>
+      <div class="options" data-type="checkbox" data-max="2" id="q5">
+        <div class="option check" data-value="revenue">
+          <div class="indicator"></div>
+          <span class="option-text">Crecimiento de revenue</span>
+        </div>
+        <div class="option check" data-value="mercados">
+          <div class="indicator"></div>
+          <span class="option-text">Entrada a nuevos mercados</span>
+        </div>
+        <div class="option check" data-value="marca">
+          <div class="indicator"></div>
+          <span class="option-text">Posicionamiento y marca</span>
+        </div>
+        <div class="option check" data-value="comunidad">
+          <div class="indicator"></div>
+          <span class="option-text">Comunidad y relaciones clave</span>
+        </div>
+        <div class="option check" data-value="gtm">
+          <div class="indicator"></div>
+          <span class="option-text">Estructura go-to-market</span>
+        </div>
+        <div class="option check" data-value="operaciones">
+          <div class="indicator"></div>
+          <span class="option-text">Operaciones y equipo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <p class="q-label">¿Cómo defines el éxito al terminar de trabajar con Blooming?</p>
+      <textarea id="q6" rows="3" placeholder="Ej: Tener una estrategia clara que el equipo pueda ejecutar, o haber cerrado los primeros 3 clientes enterprise..."></textarea>
+    </div>
+  </div>
+
+  <!-- ══ BLOCK 3: Constraints ══ -->
+  <div class="block" id="block-3">
+    <p class="block-eyebrow">03 · Constraints</p>
+    <h2 class="block-title">¿Qué te<br>frena hoy?</h2>
+    <p class="block-sub">La honestidad aquí nos permite llegar a la reunión con el diagnóstico correcto.</p>
+
+    <div class="question">
+      <p class="q-label">¿Qué es lo que más te frena para avanzar?</p>
+      <p class="multi-label">Elige hasta 2</p>
+      <div class="options" data-type="checkbox" data-max="2" id="q7">
+        <div class="option check" data-value="capital">
+          <div class="indicator"></div>
+          <span class="option-text">Capital o presupuesto limitado</span>
+        </div>
+        <div class="option check" data-value="equipo">
+          <div class="indicator"></div>
+          <span class="option-text">Equipo — faltan capacidades o personas clave</span>
+        </div>
+        <div class="option check" data-value="claridad">
+          <div class="indicator"></div>
+          <span class="option-text">Sin claridad estratégica — no sabemos bien qué priorizar</span>
+        </div>
+        <div class="option check" data-value="producto">
+          <div class="indicator"></div>
+          <span class="option-text">El producto o servicio aún no está listo para escalar</span>
+        </div>
+        <div class="option check" data-value="red">
+          <div class="indicator"></div>
+          <span class="option-text">Falta de red o acceso a mercados clave</span>
+        </div>
+        <div class="option check" data-value="prioridades">
+          <div class="indicator"></div>
+          <span class="option-text">Demasiadas prioridades al mismo tiempo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <p class="q-label">¿Tienes presupuesto asignado para este proyecto?</p>
+      <div class="options" data-type="radio" id="q8">
+        <div class="option" data-value="si">
+          <div class="indicator"></div>
+          <span class="option-text">Sí, tengo un rango claro</span>
+        </div>
+        <div class="option" data-value="idea">
+          <div class="indicator"></div>
+          <span class="option-text">Tengo una idea pero depende de la propuesta</span>
+        </div>
+        <div class="option" data-value="no">
+          <div class="indicator"></div>
+          <span class="option-text">Aún no — necesito entender el valor primero</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <p class="q-label">¿Hay algo más que quieras que sepamos antes de la reunión? <span class="optional">(opcional)</span></p>
+      <textarea id="q9" rows="3" placeholder="Contexto adicional, restricciones específicas, o algo que simplemente quieras que sepamos..."></textarea>
+    </div>
+  </div>
+
+  <!-- Confirmation -->
+  <div class="confirmation" id="confirmation">
+    <svg width="52" height="52" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="10" cy="20" rx="10" ry="4.5" stroke="#5C6B5A" stroke-width="0.75" fill="none"/>
+      <ellipse cx="30" cy="20" rx="10" ry="4.5" stroke="#5C6B5A" stroke-width="0.75" fill="none"/>
+      <ellipse cx="20" cy="10" rx="4.5" ry="10" stroke="#5C6B5A" stroke-width="0.75" fill="none"/>
+      <ellipse cx="20" cy="30" rx="4.5" ry="10" stroke="#5C6B5A" stroke-width="0.75" fill="none"/>
+    </svg>
+    <h2 class="conf-title">Gracias.</h2>
+    <p class="conf-body">
+      Recibimos tus respuestas.<br><br>
+      Llegamos a la reunión con todo el contexto — y con las preguntas correctas.<br><br>
+      Nos vemos pronto.
+    </p>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav" id="nav">
+    <button class="btn-back hidden" id="btn-back">← Volver</button>
+    <button class="btn-next" id="btn-next">Continuar →</button>
+  </div>
+
+</div>
+
+<script>
+  let current = 1;
+  const total = 3;
+
+  function updateProgress() {
+    for (let i = 1; i <= total; i++) {
+      const el = document.getElementById('step-' + i);
+      el.classList.remove('active', 'done');
+      if (i === current) el.classList.add('active');
+      if (i < current)  el.classList.add('done');
+    }
+  }
+
+  function goTo(n) {
+    document.querySelectorAll('.block').forEach(b => b.classList.remove('active'));
+    document.getElementById('block-' + n).classList.add('active');
+    document.getElementById('btn-back').classList.toggle('hidden', n === 1);
+    document.getElementById('btn-next').textContent = n === total ? 'Enviar →' : 'Continuar →';
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Option clicks
+  document.querySelectorAll('.options').forEach(group => {
+    const type = group.dataset.type;
+    const max  = parseInt(group.dataset.max) || 1;
+
+    group.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (type === 'radio') {
+          group.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+        } else {
+          if (opt.classList.contains('selected')) {
+            opt.classList.remove('selected');
+          } else if (group.querySelectorAll('.option.selected').length < max) {
+            opt.classList.add('selected');
+          }
+        }
+      });
+    });
+  });
+
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (current < total) {
+      current++;
+      goTo(current);
+    } else {
+      document.querySelectorAll('.block').forEach(b => b.classList.remove('active'));
+      document.getElementById('progress').style.display = 'none';
+      document.getElementById('nav').style.display = 'none';
+      document.getElementById('confirmation').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  document.getElementById('btn-back').addEventListener('click', () => {
+    if (current > 1) { current--; goTo(current); }
+  });
+</script>
+
+</body>
+</html>
