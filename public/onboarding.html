@@ -319,9 +319,111 @@
       .progress-step span { display: none; }
       .progress-line { margin: 0 10px; }
     }
+
+    /* ── Password gate ── */
+    #gate {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      z-index: 100;
+    }
+
+    #gate.hidden { display: none; }
+
+    .gate-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .gate-wordmark {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--negro);
+    }
+
+    .gate-field {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 260px;
+    }
+
+    .gate-field input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(26,26,26,0.2);
+      padding: 10px 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--negro);
+      text-align: center;
+      letter-spacing: 0.1em;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .gate-field input:focus { border-bottom-color: var(--bosque); }
+    .gate-field input::placeholder { color: rgba(26,26,26,0.25); letter-spacing: 0.05em; }
+
+    .gate-error {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: #c0392b;
+      opacity: 0;
+      transition: opacity 0.2s;
+      height: 16px;
+    }
+
+    .gate-error.visible { opacity: 1; }
+
+    .gate-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--negro);
+      border: none;
+      padding: 13px 36px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .gate-btn:hover { background: var(--bosque); }
   </style>
 </head>
 <body>
+
+<!-- Password gate -->
+<div id="gate">
+  <div class="gate-logo">
+    <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="10" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+      <ellipse cx="30" cy="20" rx="10" ry="4.5" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+      <ellipse cx="20" cy="10" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+      <ellipse cx="20" cy="30" rx="4.5" ry="10" stroke="#1A1A1A" stroke-width="0.8" fill="none"/>
+    </svg>
+    <span class="gate-wordmark">Blooming</span>
+  </div>
+  <div class="gate-field">
+    <input type="password" id="gate-input" placeholder="Contraseña" autocomplete="off"/>
+    <span class="gate-error" id="gate-error">Contraseña incorrecta</span>
+  </div>
+  <button class="gate-btn" id="gate-btn">Entrar →</button>
+</div>
 
 <header>
   <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -529,6 +631,24 @@
 </div>
 
 <script>
+  // Password gate
+  const gateInput = document.getElementById('gate-input');
+  const gateError = document.getElementById('gate-error');
+
+  function tryUnlock() {
+    if (gateInput.value === 'weareblooming') {
+      document.getElementById('gate').classList.add('hidden');
+    } else {
+      gateError.classList.add('visible');
+      gateInput.value = '';
+      gateInput.focus();
+      setTimeout(() => gateError.classList.remove('visible'), 2000);
+    }
+  }
+
+  document.getElementById('gate-btn').addEventListener('click', tryUnlock);
+  gateInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
   let current = 1;
   const total = 3;
 
