@@ -73,6 +73,38 @@ function OptionGroup({ type, max = 1, options, values, onChange }: OptionGroupPr
   );
 }
 
+function ScaleRow({ label, hint, value, onChange }: { label: string; hint?: string; value: number | null; onChange: (v: number) => void }) {
+  return (
+    <div style={{ marginBottom: 36 }}>
+      <p style={{ fontSize: "0.93rem", fontWeight: 400, color: "#1A1A1A", lineHeight: 1.5, marginBottom: hint ? 4 : 14 }}>{label}</p>
+      {hint && <p style={{ fontSize: "0.74rem", fontWeight: 300, color: "#1A1A1A", opacity: 0.38, marginBottom: 14, lineHeight: 1.5 }}>{hint}</p>}
+      <div style={{ display: "flex", gap: 8 }}>
+        {[0,1,2,3,4,5].map(n => {
+          const sel = value === n;
+          return (
+            <div
+              key={n}
+              onClick={() => onChange(n)}
+              style={{
+                width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center",
+                border: `1px solid ${sel ? "#5C6B5A" : "rgba(26,26,26,0.12)"}`,
+                background: sel ? "#5C6B5A" : "transparent",
+                cursor: "pointer", userSelect: "none", transition: "all 0.18s",
+                fontSize: "0.87rem", fontWeight: sel ? 500 : 300,
+                color: sel ? "#FAF8F3" : "#1A1A1A",
+              }}
+            >{n}</div>
+          );
+        })}
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
+        <span style={{ fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8B7D6B", opacity: 0.7 }}>Bajo</span>
+        <span style={{ fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8B7D6B", opacity: 0.7 }}>Alto</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Onboarding() {
   const [unlocked, setUnlocked] = useState(false);
   const [pw, setPw]             = useState("");
@@ -80,15 +112,32 @@ export default function Onboarding() {
   const [step, setStep]         = useState(1);
   const [done, setDone]         = useState(false);
 
-  const [q1, setQ1] = useState("");
-  const [q2, setQ2] = useState<string[]>([]);
-  const [q3, setQ3] = useState("");
-  const [q4, setQ4] = useState("");
-  const [q5, setQ5] = useState<string[]>([]);
-  const [q6, setQ6] = useState("");
-  const [q7, setQ7] = useState<string[]>([]);
-  const [q8, setQ8] = useState<string[]>([]);
-  const [q9, setQ9] = useState("");
+  // Bloque · Quién eres
+  const [bIdName, setBIdName]       = useState("");
+  const [bIdCompany, setBIdCompany] = useState("");
+  const [bIdRole, setBIdRole]       = useState("");
+
+  // Bloque 00 · El negocio
+  const [b0Model, setB0Model]     = useState("");
+  const [b0Trend, setB0Trend]     = useState<string[]>([]);
+  const [b0Clients, setB0Clients] = useState("");
+
+  // Bloque 01 · El problema
+  const [b1Locator, setB1Locator] = useState<string[]>([]);
+  const [b1Problem, setB1Problem] = useState("");
+  const [b1Time, setB1Time]       = useState<string[]>([]);
+
+  // Bloque 02 · Objetivos
+  const [b2Vision, setB2Vision]       = useState("");
+  const [b2Priority, setB2Priority]   = useState<string[]>([]);
+
+  // Bloque 03 · Commitment
+  const [b3Motivation, setB3Motivation]       = useState<number | null>(null);
+  const [b3Involvement, setB3Involvement]     = useState<number | null>(null);
+  const [b3Commitment, setB3Commitment]       = useState<number | null>(null);
+  const [b3Hours, setB3Hours]                 = useState<string[]>([]);
+  const [b3Budget, setB3Budget]               = useState<string[]>([]);
+  const [b3Links, setB3Links]                 = useState("");
 
   function tryUnlock() {
     if (pw === PASSWORD) { setUnlocked(true); }
@@ -120,6 +169,13 @@ export default function Onboarding() {
     color: "#8B7D6B", opacity: 0.7, marginBottom: 10,
   };
 
+  const subSection: React.CSSProperties = {
+    fontSize: "0.62rem", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase" as const,
+    color: "#8B7D6B", paddingTop: 32, marginTop: 4, marginBottom: 28,
+    borderTop: "1px solid rgba(26,26,26,0.06)",
+  };
+
+  // ── Password gate ──
   if (!unlocked) return (
     <div style={{
       minHeight: "100vh", background: "#FAF8F3",
@@ -160,6 +216,7 @@ export default function Onboarding() {
     </div>
   );
 
+  // ── Pantalla de confirmación ──
   if (done) return (
     <div style={{ minHeight: "100vh", background: "#FAF8F3", fontFamily: "'Space Grotesk', sans-serif" }}>
       <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -180,23 +237,33 @@ export default function Onboarding() {
 
   const blocks = [
     {
-      label: "01 · El problema",
-      title: <>Cuéntanos<br/>dónde estás.</>,
+      label: "00 · Quién eres",
+      title: <>Antes de empezar,<br/>preséntate.</>,
+      sub: "Tres preguntas rápidas — para llegar a la reunión sabiendo con quién hablamos.",
+    },
+    {
+      label: "01 · El negocio",
+      title: <>Cuéntanos<br/>cómo funciona.</>,
+      sub: "Queremos entender tu negocio antes de hablar de cualquier otra cosa.",
+    },
+    {
+      label: "02 · El problema",
+      title: <>¿Dónde está<br/>el quiebre?</>,
       sub: "No hay respuestas correctas. Queremos entender tu contexto real antes de sentarnos contigo.",
     },
     {
-      label: "02 · Objetivos",
-      title: <>¿Hacia dónde<br/>quieres ir?</>,
+      label: "03 · Objetivos",
+      title: <>¿Hacia dónde<br/>vas?</>,
       sub: "Queremos entender qué significa el éxito para ti — en tus propios términos.",
     },
     {
-      label: "03 · Constraints",
-      title: <>¿Qué te<br/>frena hoy?</>,
-      sub: "La honestidad aquí nos permite llegar a la reunión con el diagnóstico correcto.",
+      label: "04 · Commitment",
+      title: <>¿Cómo llegas<br/>a esta conversación?</>,
+      sub: "Una última mirada interna — nos ayuda a entender desde dónde arrancamos contigo.",
     },
   ];
 
-  const stepLabels = ["El problema", "Objetivos", "Constraints"];
+  const stepLabels = ["Quién eres", "El negocio", "El problema", "Objetivos", "Commitment"];
 
   return (
     <div style={{ minHeight: "100vh", background: "#FAF8F3", fontFamily: "'Space Grotesk', sans-serif", color: "#1A1A1A" }}>
@@ -209,10 +276,10 @@ export default function Onboarding() {
 
       <div style={{ maxWidth: 660, margin: "0 auto", padding: "72px 24px 100px" }}>
 
-        {/* Progress */}
+        {/* ── Progreso ── */}
         <div style={{ display: "flex", alignItems: "center", marginBottom: 72 }}>
           {stepLabels.map((label, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", flex: i < 2 ? 1 : "none" }}>
+            <div key={i} style={{ display: "flex", alignItems: "center", flex: i < 3 ? 1 : "none" }}>
               <div style={{
                 display: "flex", alignItems: "center", gap: 8,
                 fontSize: "0.62rem", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase",
@@ -223,12 +290,12 @@ export default function Onboarding() {
                 <div style={{ width: 5, height: 5, borderRadius: "50%", background: "currentColor" }}/>
                 <span>{label}</span>
               </div>
-              {i < 2 && <div style={{ flex: 1, height: 1, background: "rgba(26,26,26,0.1)", margin: "0 16px" }}/>}
+              {i < 4 && <div style={{ flex: 1, height: 1, background: "rgba(26,26,26,0.1)", margin: "0 16px" }}/>}
             </div>
           ))}
         </div>
 
-        {/* Block header */}
+        {/* ── Encabezado del bloque ── */}
         <p style={eyebrow}>{blocks[step - 1].label}</p>
         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, lineHeight: 1.15, marginBottom: 10 }}>
           {blocks[step - 1].title}
@@ -237,71 +304,133 @@ export default function Onboarding() {
           {blocks[step - 1].sub}
         </p>
 
-        {/* ── Step 1 ── */}
+        {/* ── Bloque · Quién eres ── */}
         {step === 1 && <>
           <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Cuál es el principal desafío que quieres resolver?</p>
-            <p style={qHint}>Sé específico — esta es la pregunta más importante del form.</p>
-            <textarea rows={4} value={q1} onChange={e => setQ1(e.target.value)} style={input}
-              placeholder="Ej: Tenemos producto y clientes, pero no logramos escalar el canal de adquisición de forma predecible..."/>
+            <p style={qLabel}>¿Cuál es tu nombre?</p>
+            <input type="text" value={bIdName} onChange={e => setBIdName(e.target.value)} style={{ ...input }} placeholder="Nombre completo"/>
           </div>
           <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Cuánto tiempo llevas enfrentando este problema?</p>
-            <OptionGroup id="q2" type="radio" options={["Menos de 3 meses","3 a 6 meses","6 a 12 meses","Más de un año"]} values={q2} onChange={setQ2}/>
+            <p style={qLabel}>¿En qué empresa o proyecto estás trabajando?</p>
+            <input type="text" value={bIdCompany} onChange={e => setBIdCompany(e.target.value)} style={{ ...input }} placeholder="Nombre de la empresa o proyecto"/>
           </div>
           <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Qué has intentado para resolverlo? <span style={{ opacity: 0.35, fontWeight: 300, fontSize: "0.83rem" }}>(opcional)</span></p>
-            <p style={qHint}>Nos ayuda a no proponer lo que ya no funcionó.</p>
-            <textarea rows={3} value={q3} onChange={e => setQ3(e.target.value)} style={input}
-              placeholder="Ej: Contratamos un consultor, probamos paid ads, reestructuramos el equipo comercial..."/>
+            <p style={qLabel}>¿Cuál es tu rol?</p>
+            <input type="text" value={bIdRole} onChange={e => setBIdRole(e.target.value)} style={{ ...input }} placeholder="Ej: CEO, Head of Growth, Founder..."/>
           </div>
         </>}
 
-        {/* ── Step 2 ── */}
+        {/* ── Bloque 01 · El negocio ── */}
         {step === 2 && <>
           <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Cuál es tu objetivo más importante en los próximos 12 meses?</p>
-            <p style={qHint}>Puede ser un número, un mercado, una posición — lo que sea real y concreto para ti.</p>
-            <textarea rows={3} value={q4} onChange={e => setQ4(e.target.value)} style={input}
-              placeholder="Ej: Llegar a $500K ARR, lanzar en San Francisco, construir una comunidad de 1,000 usuarios activos..."/>
+            <p style={qLabel}>¿Cuál es tu modelo de negocios y cómo generas revenue?</p>
+            <p style={qHint}>Tu fuente principal de ingresos hoy — no la visión, la realidad actual.</p>
+            <textarea rows={3} value={b0Model} onChange={e => setB0Model(e.target.value)} style={input}
+              placeholder="Ej: Vendemos bolsas directamente a consumidores vía web y tiendas propias. También tenemos una línea B2B con empresas para merchandising..."/>
+          </div>
+          <div style={{ marginBottom: 44 }}>
+            <p style={qLabel}>¿Cómo están evolucionando tus ingresos?</p>
+            <OptionGroup id="b0Trend" type="radio"
+              options={["Creciendo rápido","Creciendo despacio","Estable","Bajando"]}
+              values={b0Trend} onChange={setB0Trend}/>
+          </div>
+          <div style={{ marginBottom: 44 }}>
+            <p style={qLabel}>¿Cómo consigues clientes hoy y quiénes son?</p>
+            <p style={qHint}>Canal principal, perfil del cliente, cómo llegan a ti.</p>
+            <textarea rows={3} value={b0Clients} onChange={e => setB0Clients(e.target.value)} style={input}
+              placeholder="Ej: La mayoría llega por Instagram y Google. Nuestro cliente principal es mujer 25–40, Chile y Argentina..."/>
+          </div>
+        </>}
+
+        {/* ── Bloque 02 · El problema ── */}
+        {step === 3 && <>
+          <div style={{ marginBottom: 44 }}>
+            <p style={qLabel}>Si tuvieras que señalar dónde se rompe tu crecimiento, ¿dónde está el cuello de botella?</p>
+            <p style={qHint}>Elige la opción que más se acerca — aunque no sea exacta.</p>
+            <OptionGroup id="b1Locator" type="radio"
+              options={[
+                "No llega suficiente gente / nadie nos conoce (demanda)",
+                "Llega gente pero no compra (conversión)",
+                "Compran, pero poco o a mal margen (valor / precio)",
+                "Compran una vez y no vuelven (retención)",
+                "Vendemos, pero adquirir cuesta más de lo que deja (economía unitaria)",
+                "No estoy seguro — necesito ayuda para identificarlo",
+              ]}
+              values={b1Locator} onChange={setB1Locator}/>
+          </div>
+          <div style={{ marginBottom: 44 }}>
+            <p style={qLabel}>Cuéntanos qué está pasando — con el contexto que tú tienes, no el que crees que queremos escuchar.</p>
+            <p style={qHint}>Esta es la pregunta más importante del form. Sé específico.</p>
+            <textarea rows={5} value={b1Problem} onChange={e => setB1Problem(e.target.value)} style={input}
+              placeholder="Ej: Nuestra web antes representaba el 50% de las ventas y hoy es el 30%. No sabemos si cayó el tráfico, si la gente no convierte, o si simplemente otros canales crecieron más..."/>
+          </div>
+          <div style={{ marginBottom: 44 }}>
+            <p style={qLabel}>¿Cuánto tiempo llevas con este problema?</p>
+            <OptionGroup id="b1Time" type="radio"
+              options={["Menos de 3 meses","3 a 6 meses","6 a 12 meses","Más de un año"]}
+              values={b1Time} onChange={setB1Time}/>
+          </div>
+        </>}
+
+        {/* ── Bloque 03 · Objetivos ── */}
+        {step === 4 && <>
+          <div style={{ marginBottom: 44 }}>
+            <p style={qLabel}>¿Dónde quieres estar en 5 años, y qué necesitas lograr este año para llegar ahí?</p>
+            <p style={qHint}>Tu visión real — dónde quieres llegar y el primer paso concreto.</p>
+            <textarea rows={5} value={b2Vision} onChange={e => setB2Vision(e.target.value)} style={input}
+              placeholder="Ej: En 5 años queremos ser la marca de bolsas sostenibles de referencia en LatAm. Este año necesitamos recuperar el canal web y llegar a $500K en ventas..."/>
           </div>
           <div style={{ marginBottom: 44 }}>
             <p style={qLabel}>¿En qué área está tu mayor prioridad hoy?</p>
             <p style={multiLabel}>Elige hasta 2</p>
-            <OptionGroup id="q5" type="checkbox" max={2}
+            <OptionGroup id="b2Priority" type="checkbox" max={2}
               options={["Crecimiento de revenue","Entrada a nuevos mercados","Posicionamiento y marca","Comunidad y relaciones clave","Estructura go-to-market","Operaciones y equipo"]}
-              values={q5} onChange={setQ5}/>
-          </div>
-          <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Cómo defines el éxito al terminar de trabajar con Blooming?</p>
-            <textarea rows={3} value={q6} onChange={e => setQ6(e.target.value)} style={input}
-              placeholder="Ej: Tener una estrategia clara que el equipo pueda ejecutar, o haber cerrado los primeros 3 clientes enterprise..."/>
+              values={b2Priority} onChange={setB2Priority}/>
           </div>
         </>}
 
-        {/* ── Step 3 ── */}
-        {step === 3 && <>
+        {/* ── Bloque 04 · Commitment ── */}
+        {step === 5 && <>
+          <ScaleRow
+            label="Motivación"
+            hint="¿Qué tan motivado estás con este proyecto hoy?"
+            value={b3Motivation}
+            onChange={setB3Motivation}
+          />
+          <ScaleRow
+            label="Involucramiento"
+            hint="¿Qué tan involucrado estarás tú personalmente en el proceso?"
+            value={b3Involvement}
+            onChange={setB3Involvement}
+          />
+          <ScaleRow
+            label="Compromiso"
+            hint="¿Qué tan comprometido estás con cambiar la situación actual?"
+            value={b3Commitment}
+            onChange={setB3Commitment}
+          />
           <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Qué es lo que más te frena para avanzar?</p>
-            <p style={multiLabel}>Elige hasta 2</p>
-            <OptionGroup id="q7" type="checkbox" max={2}
-              options={["Capital o presupuesto limitado","Equipo — faltan capacidades o personas clave","Sin claridad estratégica — no sabemos bien qué priorizar","El producto o servicio aún no está listo para escalar","Falta de red o acceso a mercados clave","Demasiadas prioridades al mismo tiempo"]}
-              values={q7} onChange={setQ7}/>
+            <p style={qLabel}>¿Cuántas horas por semana puedes dedicar a este proyecto?</p>
+            <OptionGroup id="b3Hours" type="radio"
+              options={["Menos de 2 horas","2 a 5 horas","5 a 10 horas","Más de 10 horas"]}
+              values={b3Hours} onChange={setB3Hours}/>
           </div>
           <div style={{ marginBottom: 44 }}>
             <p style={qLabel}>¿Tienes presupuesto asignado para este proyecto?</p>
-            <OptionGroup id="q8" type="radio"
+            <OptionGroup id="b3Budget" type="radio"
               options={["Sí, tengo un rango claro","Tengo una idea pero depende de la propuesta","Aún no — necesito entender el valor primero"]}
-              values={q8} onChange={setQ8}/>
+              values={b3Budget} onChange={setB3Budget}/>
           </div>
+          <p style={subSection}>Anexo</p>
           <div style={{ marginBottom: 44 }}>
-            <p style={qLabel}>¿Hay algo más que quieras que sepamos antes de la reunión? <span style={{ opacity: 0.35, fontWeight: 300, fontSize: "0.83rem" }}>(opcional)</span></p>
-            <textarea rows={3} value={q9} onChange={e => setQ9(e.target.value)} style={input}
-              placeholder="Contexto adicional, restricciones específicas, o algo que simplemente quieras que sepamos..."/>
+            <p style={qLabel}>Links a documentos relevantes <span style={{ opacity: 0.35, fontWeight: 300, fontSize: "0.83rem" }}>(opcional)</span></p>
+            <p style={qHint}>Deck, métricas, data room — cualquier material que nos ayude a llegar preparados.</p>
+            <textarea rows={3} value={b3Links} onChange={e => setB3Links(e.target.value)} style={input}
+              placeholder="https://..."/>
           </div>
         </>}
 
-        {/* Nav */}
+        {/* ── Navegación ── */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 64, paddingTop: 28, borderTop: "1px solid rgba(26,26,26,0.06)" }}>
           <button
             onClick={() => setStep(s => s - 1)}
@@ -313,13 +442,13 @@ export default function Onboarding() {
             }}
           >← Volver</button>
           <button
-            onClick={() => step < 3 ? setStep(s => s + 1) : setDone(true)}
+            onClick={() => step < 5 ? setStep(s => s + 1) : setDone(true)}
             style={{
               fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.72rem", fontWeight: 400,
               letterSpacing: "0.22em", textTransform: "uppercase", color: "#FAF8F3",
               background: "#1A1A1A", border: "none", padding: "13px 36px", cursor: "pointer",
             }}
-          >{step < 3 ? "Continuar →" : "Enviar →"}</button>
+          >{step < 4 ? "Continuar →" : "Enviar →"}</button>
         </div>
 
       </div>
