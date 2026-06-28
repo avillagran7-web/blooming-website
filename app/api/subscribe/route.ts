@@ -39,12 +39,18 @@ export async function POST(req: Request) {
 
     // 1. Save to Google Sheet
     const sheetUrl = process.env.GOOGLE_SHEET_WEBHOOK;
-    if (sheetUrl) {
-      await fetch(sheetUrl, {
+    if (!sheetUrl) {
+      console.error("[subscribe] GOOGLE_SHEET_WEBHOOK env var is not set");
+    } else {
+      const sheetRes = await fetch(sheetUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(row),
-      }).catch(() => {});
+      });
+      if (!sheetRes.ok) {
+        const body = await sheetRes.text().catch(() => "");
+        console.error(`[subscribe] Google Sheet webhook failed: ${sheetRes.status} ${body}`);
+      }
     }
 
     // 2. Send notification email

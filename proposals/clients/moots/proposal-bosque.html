@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooming x Moots — Go-to-Market Partnership</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --negro: #1A1A1A;
+      --blanco: #FFFFFF;
+      --bosque: #5C6B5A;
+      --bosque-deep: #4A5748;
+      --tierra: #8B7D6B;
+      --tierra-light: #C4B8A8;
+      --hongo: #9E8E80;
+      --cream: #F7F5F1;
+      --cream-soft: rgba(247, 245, 241, 0.85);
+      --cream-muted: rgba(247, 245, 241, 0.5);
+    }
+
+    @page {
+      size: 11in 8.5in;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--cream);
+      background: var(--bosque);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .slide {
+      width: 11in;
+      height: 8.5in;
+      padding: 1in 1.2in;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      page-break-after: always;
+      background: var(--bosque);
+      overflow: hidden;
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+    }
+
+    .display {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    .sans {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+    }
+
+    .uppercase {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    .line {
+      width: 40px;
+      height: 1px;
+      background: var(--cream);
+      opacity: 0.25;
+    }
+
+    .slide-footer {
+      position: absolute;
+      bottom: 0.6in;
+      left: 1.2in;
+      right: 1.2in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slide-footer span {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.45;
+    }
+
+    /* ─── SLIDE 1: COVER ─── */
+    .slide-cover {
+      justify-content: space-between;
+      padding-top: 1.2in;
+      padding-bottom: 1in;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cover-wordmark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .cover-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cover-tagline {
+      font-size: 3.6rem;
+      line-height: 1.1;
+      color: var(--cream);
+    }
+
+    .cover-tagline em {
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .cover-subtitle {
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      border: 1px solid rgba(196, 184, 168, 0.3);
+      padding: 6px 16px;
+      border-radius: 2px;
+      align-self: flex-start;
+      margin-top: 12px;
+      opacity: 0.7;
+    }
+
+    /* ─── SLIDE 2: OPPORTUNITY ─── */
+    .slide-opportunity {
+      gap: 36px;
+    }
+
+    .opportunity-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      max-width: 8in;
+      color: var(--cream);
+    }
+
+    .opportunity-personal {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 7in;
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .opportunity-body {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 7in;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .opportunity-highlights {
+      display: flex;
+      gap: 56px;
+      margin-top: 8px;
+    }
+
+    .opportunity-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 2.4in;
+    }
+
+    .opportunity-item h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--tierra-light);
+    }
+
+    .opportunity-item p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+
+    /* ─── SLIDE 3: WHAT WE BRING ─── */
+    .slide-bring {
+      gap: 40px;
+    }
+
+    .bring-headline {
+      font-size: 2.6rem;
+      line-height: 1.15;
+      max-width: 8in;
+      color: var(--cream);
+    }
+
+    .bring-subtitle {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--tierra-light);
+      opacity: 0.8;
+      margin-top: -12px;
+    }
+
+    .bring-body {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 6.5in;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .bring-traction {
+      display: flex;
+      gap: 56px;
+      margin-top: 4px;
+    }
+
+    .bring-traction-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bring-traction-item .number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .bring-traction-item .label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      opacity: 0.8;
+    }
+
+    .bring-values {
+      display: flex;
+      gap: 40px;
+      margin-top: 4px;
+    }
+
+    .bring-values span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--tierra-light);
+    }
+
+    .bring-values .dot {
+      font-style: normal;
+      color: var(--cream);
+      opacity: 0.25;
+      font-size: 1rem;
+      align-self: center;
+    }
+
+    /* ─── SLIDE 4: THE PLAN ─── */
+    .slide-plan {
+      gap: 48px;
+    }
+
+    .plan-label {
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .plan-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-top: -16px;
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 56px;
+    }
+
+    .plan-item {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .plan-number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--tierra-light);
+      opacity: 0.75;
+    }
+
+    .plan-item h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      color: var(--cream);
+    }
+
+    .plan-item .plan-timing {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .plan-item p {
+      font-size: 0.8rem;
+      line-height: 1.65;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+
+    /* ─── SLIDE 5: THE EVENT ─── */
+    .slide-event {
+      gap: 40px;
+    }
+
+    .event-label {
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .event-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-top: -8px;
+    }
+
+    .event-headline em {
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .event-body {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 7in;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .event-details {
+      display: flex;
+      gap: 56px;
+      margin-top: 8px;
+    }
+
+    .event-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .event-detail .detail-value {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .event-detail .detail-label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      opacity: 0.8;
+    }
+
+    .event-powered {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--tierra-light);
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    /* ─── SLIDE 6: WHY THIS WORKS ─── */
+    .slide-why {
+      gap: 48px;
+    }
+
+    .why-label {
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .why-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-top: -16px;
+    }
+
+    .why-headline em {
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 56px;
+    }
+
+    .why-item {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .why-number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--tierra-light);
+      opacity: 0.75;
+    }
+
+    .why-item h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      color: var(--cream);
+    }
+
+    .why-item p {
+      font-size: 0.8rem;
+      line-height: 1.65;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+
+    /* ─── SLIDE 7: INVESTMENT ─── */
+    .slide-investment {
+      gap: 36px;
+    }
+
+    .investment-label {
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .investment-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-top: -8px;
+    }
+
+    .investment-total {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .investment-total-label {
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    .investment-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid rgba(247, 245, 241, 0.12);
+      padding-top: 20px;
+      max-width: 7in;
+    }
+
+    .investment-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(247, 245, 241, 0.08);
+    }
+
+    .investment-row:last-child {
+      border-bottom: none;
+    }
+
+    .investment-row .inv-item {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+
+    .investment-row .inv-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.85;
+    }
+
+    .investment-note {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--tierra-light);
+      opacity: 0.8;
+      max-width: 6in;
+      line-height: 1.6;
+    }
+
+    /* ─── SLIDE 8: TIMELINE ─── */
+    .slide-timeline {
+      gap: 40px;
+    }
+
+    .timeline-label {
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .timeline-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-top: -8px;
+    }
+
+    .timeline-track {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 8in;
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(247, 245, 241, 0.08);
+    }
+
+    .timeline-row:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-date {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      opacity: 0.65;
+      min-width: 1.6in;
+      flex-shrink: 0;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    /* ─── SLIDE 9: CLOSE ─── */
+    .slide-close {
+      align-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    .close-headline {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .close-personal {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 5.5in;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .close-email {
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .close-url {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      margin-top: 4px;
+      opacity: 0.55;
+    }
+
+    /* ─── SCREEN HELPERS ─── */
+    @media screen {
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 24px;
+        background: #3d4a3b;
+      }
+      .slide {
+        box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+        border-radius: 2px;
+      }
+    }
+
+    /* ─── MOBILE RESPONSIVE ─── */
+    @media screen and (max-width: 900px) {
+      body {
+        padding: 12px;
+        gap: 12px;
+      }
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: 100svh;
+        padding: 48px 28px 80px;
+        page-break-after: unset;
+      }
+
+      /* Cover */
+      .slide-cover { padding-top: 48px; padding-bottom: 48px; gap: 32px; }
+      .cover-tagline { font-size: 2.4rem; }
+
+      /* Opportunity */
+      .slide-opportunity { gap: 24px; }
+      .opportunity-headline { font-size: 1.5rem; max-width: 100%; }
+      .opportunity-personal { font-size: 0.95rem; max-width: 100%; }
+      .opportunity-body { font-size: 0.82rem; max-width: 100%; }
+      .opportunity-highlights { gap: 24px; flex-direction: column; }
+      .opportunity-item { max-width: 100%; }
+
+      /* Bring */
+      .slide-bring { gap: 24px; }
+      .bring-headline { font-size: 1.5rem; max-width: 100%; }
+      .bring-body { font-size: 0.82rem; max-width: 100%; }
+      .bring-traction { gap: 28px; flex-wrap: wrap; }
+      .bring-traction-item .number { font-size: 1.8rem; }
+      .bring-values { gap: 20px; flex-wrap: wrap; }
+      .bring-values span { font-size: 1.1rem; }
+
+      /* Plan */
+      .slide-plan { gap: 28px; }
+      .plan-headline { font-size: 1.5rem; }
+      .plan-grid { grid-template-columns: 1fr; gap: 28px; }
+      .plan-item h3 { font-size: 1.3rem; }
+
+      /* Event */
+      .slide-event { gap: 24px; }
+      .event-headline { font-size: 1.5rem; }
+      .event-body { font-size: 0.82rem; max-width: 100%; }
+      .event-details { gap: 24px; flex-wrap: wrap; }
+
+      /* Why */
+      .slide-why { gap: 28px; }
+      .why-headline { font-size: 1.5rem; }
+      .why-grid { grid-template-columns: 1fr; gap: 28px; }
+      .why-item h3 { font-size: 1.3rem; }
+
+      /* Investment */
+      .slide-investment { gap: 24px; }
+      .investment-headline { font-size: 1.5rem; }
+      .investment-total { font-size: 2.2rem; }
+      .investment-breakdown { max-width: 100%; }
+
+      /* Timeline */
+      .slide-timeline { gap: 24px; }
+      .timeline-headline { font-size: 1.5rem; }
+      .timeline-row { flex-direction: column; gap: 6px; }
+      .timeline-date { min-width: auto; }
+
+      /* Close */
+      .slide-close { gap: 24px; }
+      .close-headline { font-size: 2.2rem; }
+      .close-personal { font-size: 0.9rem; max-width: 100%; }
+
+      /* Footer */
+      .slide-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 1: COVER                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-cover">
+    <div class="cover-top">
+      <svg width="48" height="48" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="14" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+        <ellipse cx="24" cy="46" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+        <ellipse cx="12" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+        <ellipse cx="36" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+        <circle cx="24" cy="30" r="4" fill="#F7F5F1"/>
+      </svg>
+      <span class="cover-wordmark">Blooming</span>
+    </div>
+    <div class="cover-main">
+      <h1 class="display cover-tagline">Bringing Moots to the<br><em>AI ecosystem.</em></h1>
+      <p class="cover-subtitle">Go-to-Market Partnership &middot; May &ndash; July 2026</p>
+      <span class="cover-badge">Confidential</span>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>weareblooming.co</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 2: THE OPPORTUNITY                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-opportunity">
+    <span class="uppercase" style="color: var(--tierra-light); opacity: 0.85;">The opportunity</span>
+    <h2 class="display opportunity-headline">Events are the last trust channel.<br>Most companies <em style="font-style: italic; color: var(--tierra-light);">waste them.</em></h2>
+    <p class="opportunity-personal">
+      "Tonje, I saw Moots at HumanX &mdash; and I immediately understood what you're building. As someone who has produced over fifty events, I know the pain firsthand: guest selection is manual, follow-ups fall through the cracks, and no one can tell you which conversation actually moved the needle. Moots solves exactly this. The timing couldn't be better."
+    </p>
+    <p class="opportunity-body">
+      AI is saturating every digital channel. Cold outreach is noise. But events remain one of the last high-signal ways to build real trust &mdash; yet most organizations treat them as one-off moments with no memory. Guest curation is reactive, attribution from event to pipeline is nonexistent, and every gathering starts from zero.
+    </p>
+    <div class="opportunity-highlights">
+      <div class="opportunity-item">
+        <h4>The shift</h4>
+        <div class="line"></div>
+        <p>Events are becoming the primary trust channel as AI saturates digital outreach. High-signal, high-touch, irreplaceable.</p>
+      </div>
+      <div class="opportunity-item">
+        <h4>The gap</h4>
+        <div class="line"></div>
+        <p>Most organizations still treat events as one-off moments &mdash; no memory, no compounding, no attribution.</p>
+      </div>
+      <div class="opportunity-item">
+        <h4>The timing</h4>
+        <div class="line"></div>
+        <p>Moots is ready. The audience exists. Field marketing teams are actively looking for this solution.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>02</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 3: WHAT WE BRING                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-bring">
+    <span class="uppercase" style="color: var(--tierra-light); opacity: 0.85;">What we bring</span>
+    <h2 class="display bring-headline">Not a referral partner.<br>A live <em style="font-style: italic; color: var(--tierra-light);">proof of concept.</em></h2>
+    <p class="bring-body">
+      Blooming produces curated events for AI and technology companies across three ecosystems. We don't just make introductions &mdash; we put Moots in front of the right people through warm relationships, curated programming, and a live environment where the platform speaks for itself. Leaders from IBM, Nvidia, Neo4j, and Google already sit in our rooms.
+    </p>
+    <div class="bring-traction">
+      <div class="bring-traction-item">
+        <span class="number">50+</span>
+        <span class="label">Events produced</span>
+      </div>
+      <div class="bring-traction-item">
+        <span class="number">70K+</span>
+        <span class="label">Attendees reached</span>
+      </div>
+      <div class="bring-traction-item">
+        <span class="number">30+</span>
+        <span class="label">Warm contacts</span>
+      </div>
+      <div class="bring-traction-item">
+        <span class="number">3</span>
+        <span class="label">Ecosystems</span>
+      </div>
+    </div>
+    <div class="bring-values">
+      <span>Speed</span>
+      <span class="dot">&middot;</span>
+      <span>Quality</span>
+      <span class="dot">&middot;</span>
+      <span>Trust</span>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>03</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 4: THE PLAN                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-plan">
+    <span class="uppercase plan-label">The plan</span>
+    <h2 class="display plan-headline">Three phases. One clear path.</h2>
+    <div class="plan-grid">
+      <div class="plan-item">
+        <span class="plan-number">01</span>
+        <div class="line"></div>
+        <h3>Awareness</h3>
+        <span class="plan-timing">May 2026</span>
+        <p>Introduce Moots across Blooming's network through warm, personal outreach. Position the platform with the right people before any pitch &mdash; context first, always.</p>
+      </div>
+      <div class="plan-item">
+        <span class="plan-number">02</span>
+        <div class="line"></div>
+        <h3>Demos</h3>
+        <span class="plan-timing">May &ndash; June 2026</span>
+        <p>Curated one-on-one demos with field marketing managers and event leads who run events constantly. Warm introductions, not cold lists.</p>
+      </div>
+      <div class="plan-item">
+        <span class="plan-number">03</span>
+        <div class="line"></div>
+        <h3>The Event</h3>
+        <span class="plan-timing">June &ndash; July 2026</span>
+        <p>A hands-on workshop powered by Moots &mdash; attendees use the platform live, share best practices, and give real-time feedback. The product becomes the proof.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>04</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 5: THE EVENT                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-event">
+    <span class="uppercase event-label">The event</span>
+    <h2 class="display event-headline">A hands-on workshop,<br><em>powered by Moots.</em></h2>
+    <p class="event-body">
+      An intimate session with 10&ndash;15 field marketing managers from leading AI and tech companies. Everyone gets hands on the platform &mdash; using Moots live, sharing best practices for guest intelligence, and giving real-time feedback. They don't just hear about the product. They use it, together.
+    </p>
+    <div class="event-details">
+      <div class="event-detail">
+        <span class="detail-value">10&ndash;15</span>
+        <span class="detail-label">Guests</span>
+      </div>
+      <div class="event-detail">
+        <span class="detail-value">San Francisco</span>
+        <span class="detail-label">Location</span>
+      </div>
+      <div class="event-detail">
+        <span class="detail-value">2.5&ndash;3 hrs</span>
+        <span class="detail-label">Duration</span>
+      </div>
+      <div class="event-detail">
+        <span class="detail-value">Field Marketing</span>
+        <span class="detail-label">Audience</span>
+      </div>
+    </div>
+    <p class="event-powered">The 6th event on Moots produces 7&times; more pipeline than the 1st &mdash; because the platform compounds intelligence.</p>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>05</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 6: WHY THIS WORKS                    -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-why">
+    <span class="uppercase why-label">Why this works</span>
+    <h2 class="display why-headline">Not just distribution.<br>A <em>growth engine.</em></h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-number">01</span>
+        <div class="line"></div>
+        <h3>Warm network</h3>
+        <p>Real relationships, not cold lists. Every introduction comes with context, trust, and a reason to take the meeting. Built over fifty events and three ecosystems.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-number">02</span>
+        <div class="line"></div>
+        <h3>Aligned incentives</h3>
+        <p>Commission-based pricing means Blooming is invested in Moots' success &mdash; not just delivery. We win when you convert, which means every introduction is intentional.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-number">03</span>
+        <div class="line"></div>
+        <h3>The right people, at the right moment</h3>
+        <p>Field marketing managers who run events constantly. They feel the pain of manual guest selection and broken attribution every week. They're ready for Moots.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>06</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 7: INVESTMENT                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-investment">
+    <span class="uppercase investment-label">Investment</span>
+    <h2 class="display investment-headline">Simple, transparent, aligned.</h2>
+    <div>
+      <span class="investment-total">$3,000</span>
+      <p class="investment-total-label">starting at &mdash; excl. logistics &amp; commission</p>
+    </div>
+    <div class="investment-breakdown">
+      <div class="investment-row">
+        <span class="inv-item">Awareness campaign (warm intros across network)</span>
+        <span class="inv-price">$1,000</span>
+      </div>
+      <div class="investment-row">
+        <span class="inv-item">Curated demos (per qualified meeting)</span>
+        <span class="inv-price">$50 / each</span>
+      </div>
+      <div class="investment-row">
+        <span class="inv-item">Curated workshop (production &amp; curation)</span>
+        <span class="inv-price">$1,000</span>
+      </div>
+      <div class="investment-row">
+        <span class="inv-item">Event logistics (venue, F&amp;B)</span>
+        <span class="inv-price">At cost</span>
+      </div>
+      <div class="investment-row">
+        <span class="inv-item">Revenue commission (6-month window)</span>
+        <span class="inv-price">10%</span>
+      </div>
+    </div>
+    <p class="investment-note">Pricing reflects early-partnership rates for a first activation. Market references available upon request.</p>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>07</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 8: TIMELINE                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-timeline">
+    <span class="uppercase timeline-label">Timeline</span>
+    <h2 class="display timeline-headline">Before May 1 &rarr; End of July</h2>
+    <div class="timeline-track">
+      <div class="timeline-row">
+        <span class="timeline-date">Before May 1</span>
+        <span class="timeline-desc">Align on messaging, define target profiles, finalize partnership terms</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-date">May 1 &ndash; 15</span>
+        <span class="timeline-desc">Launch warm outreach &mdash; introduce Moots across Blooming's network with personal context</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-date">May 15 &ndash; June 15</span>
+        <span class="timeline-desc">Run curated demos with qualified field marketing leads &mdash; one-on-one, warm introductions</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-date">June &ndash; Early July</span>
+        <span class="timeline-desc">Hands-on workshop in San Francisco &mdash; powered by Moots, 10&ndash;15 field marketing managers</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-date">July</span>
+        <span class="timeline-desc">Follow-up, pipeline tracking, outcomes review &mdash; set the foundation for ongoing activation</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span>08</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 9: CLOSE                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-close">
+    <svg width="56" height="56" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="14" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+      <ellipse cx="24" cy="46" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+      <ellipse cx="12" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+      <ellipse cx="36" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+      <circle cx="24" cy="30" r="4" fill="#F7F5F1"/>
+    </svg>
+    <h2 class="display close-headline">Let's build the right room.</h2>
+    <p class="close-personal">
+      "Tonje, we're both French, we both ended up in the middle of the AI world, and we both believe relationships are what actually move things forward. I'd love to help you get Moots in front of the people who need it most &mdash; and I think we can do something genuinely great together."
+    </p>
+    <div class="line" style="width: 60px; margin: 4px auto;"></div>
+    <p class="close-email">alison@weareblooming.co</p>
+    <p class="close-url">weareblooming.co</p>
+    <div class="slide-footer">
+      <span>Blooming &times; Moots</span>
+      <span style="opacity: 0.35;">Confidential</span>
+    </div>
+  </div>
+
+</body>
+</html>

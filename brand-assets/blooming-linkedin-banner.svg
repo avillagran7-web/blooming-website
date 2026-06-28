@@ -1,0 +1,31 @@
+<svg width="4200" height="700" viewBox="0 0 4200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="4200" height="700" fill="#1A1A1A"/>
+
+  <!-- Isotipo ghost centrado como textura de fondo — no como logo principal -->
+  <ellipse cx="1950" cy="350" rx="300" ry="135" stroke="#FAF8F3" stroke-width="1.5" fill="none" opacity="0.04"/>
+  <ellipse cx="2250" cy="350" rx="300" ry="135" stroke="#FAF8F3" stroke-width="1.5" fill="none" opacity="0.04"/>
+  <ellipse cx="2100" cy="200" rx="135" ry="300" stroke="#FAF8F3" stroke-width="1.5" fill="none" opacity="0.04"/>
+  <ellipse cx="2100" cy="500" rx="135" ry="300" stroke="#FAF8F3" stroke-width="1.5" fill="none" opacity="0.04"/>
+
+  <!-- Línea decorativa -->
+  <line x1="2020" y1="264" x2="2180" y2="264" stroke="#FAF8F3" stroke-width="0.6" opacity="0.2"/>
+
+  <!-- Tagline principal — centrado -->
+  <text x="2100" y="390"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="110"
+    font-weight="300"
+    fill="#FAF8F3"
+    text-anchor="middle"
+    opacity="0.95">Growth that <tspan font-style="italic">matters.</tspan></text>
+
+  <!-- Ciudades -->
+  <text x="2100" y="470"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="32"
+    font-weight="400"
+    letter-spacing="10"
+    fill="#FAF8F3"
+    text-anchor="middle"
+    opacity="0.85">SAN FRANCISCO · SANTIAGO · PARIS</text>
+</svg>

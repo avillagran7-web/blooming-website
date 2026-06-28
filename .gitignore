@@ -28,6 +28,13 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# data (PII - never commit)
+/data/
+
+# google credentials & tokens
+client_secret*.json
+token.json
+
 # vercel
 .vercel
 

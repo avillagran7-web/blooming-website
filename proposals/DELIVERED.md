@@ -56,6 +56,20 @@ Registro de propuestas entregadas a clientes. Actualizar después de cada entreg
 
 ---
 
+## EventGen — Venues & Vendors Sourcing
+
+**Archivo PPTX:** `proposals/clients/eventgen/Blooming x EventGen — Venues & Vendors Sourcing.pptx`
+**Script PPTX:** `proposals/clients/eventgen/generate_pptx.py`
+**Tema:** Blanco con acentos bosque (mismo sistema que Bond)
+**Estado:** v2 generada (Jun 5, 2026). Pendiente subir a Google Drive.
+**Deal:** $5K flat fee. 2 semanas (deadline May 30). 10+ ciudades. 20% comisión ongoing.
+**Slides:** Cover · Opportunity · Mission · Scope of Work · Deliverables · Investment · Close (7 slides)
+**Contenido:** Propuesta de Alison (EVENTGen Proposal.pptx en root). Venues + catering + media. Pilot en Digital Jungle SF.
+**Cambios v2:** Scope actualizado con badge incentivo (500-unit pricing negotiation) + chatbot integration en venue website.
+**Contacto:** Por confirmar — cliente de Alison.
+
+---
+
 ## TAGcontrol — Propuesta interna
 
 **Carpeta:** `proposals/clients/tagcontrol/`

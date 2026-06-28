@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alison Granger — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --negro: #1A1A1A;
+      --blanco: #FFFFFF;
+      --bosque: #5C6B5A;
+      --bosque-deep: #4A5748;
+      --tierra: #8B7D6B;
+      --tierra-light: #C4B8A8;
+      --hongo: #9E8E80;
+      --cream: #F7F5F1;
+      --cream-soft: rgba(247, 245, 241, 0.85);
+      --cream-muted: rgba(247, 245, 241, 0.5);
+    }
+
+    @page {
+      size: 11in 8.5in;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--cream);
+      background: var(--bosque);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .slide {
+      width: 11in;
+      height: 8.5in;
+      padding: 1in 1.2in;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      page-break-after: always;
+      background: var(--bosque);
+      overflow: hidden;
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+    }
+
+    .display {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    .sans {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+    }
+
+    .uppercase {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    .line {
+      width: 40px;
+      height: 1px;
+      background: var(--cream);
+      opacity: 0.25;
+    }
+
+    .slide-footer {
+      position: absolute;
+      bottom: 0.6in;
+      left: 1.2in;
+      right: 1.2in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slide-footer span {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.45;
+    }
+
+    /* ─── SLIDE 1: COVER ─── */
+    .slide-cover {
+      justify-content: space-between;
+      padding-top: 1.2in;
+      padding-bottom: 1in;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cover-wordmark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .cover-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cover-tagline {
+      font-size: 3.6rem;
+      line-height: 1.1;
+      color: var(--cream);
+    }
+
+    .cover-tagline em {
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .cover-subtitle {
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      border: 1px solid rgba(196, 184, 168, 0.3);
+      padding: 6px 16px;
+      border-radius: 2px;
+      align-self: flex-start;
+      margin-top: 12px;
+      opacity: 0.7;
+    }
+
+    /* ─── CONTENT SLIDES ─── */
+    .slide-content {
+      gap: 36px;
+    }
+
+    .content-headline {
+      font-size: 2.4rem;
+      line-height: 1.15;
+      max-width: 8in;
+      color: var(--cream);
+    }
+
+    .content-headline em {
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .content-label {
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    .content-body {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-width: 7in;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .content-italic {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 7in;
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      gap: 56px;
+      margin-top: 8px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      opacity: 0.8;
+    }
+
+    /* Grid layouts */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 56px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .grid-number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--tierra-light);
+      opacity: 0.75;
+    }
+
+    .grid-item h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      color: var(--cream);
+    }
+
+    .grid-item p {
+      font-size: 0.8rem;
+      line-height: 1.65;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+
+    .grid-item .timing {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      opacity: 0.85;
+    }
+
+    /* Values row */
+    .values-row {
+      display: flex;
+      gap: 40px;
+      margin-top: 4px;
+    }
+
+    .values-row span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--tierra-light);
+    }
+
+    .values-row .dot {
+      font-style: normal;
+      color: var(--cream);
+      opacity: 0.25;
+      font-size: 1rem;
+      align-self: center;
+    }
+
+    /* Services list */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 56px;
+    }
+
+    .service-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .service-block h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--tierra-light);
+    }
+
+    .service-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .service-block li {
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--cream);
+      opacity: 0.7;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .service-block li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── PARTNERS SLIDE ─── */
+    .partners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 48px;
+      align-items: center;
+    }
+
+    .partner-logo {
+      height: 28px;
+      opacity: 0.7;
+      filter: brightness(0) invert(0.92);
+      transition: opacity 0.2s;
+    }
+
+    .partner-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      opacity: 0.55;
+    }
+
+    .partners-note {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.45;
+      margin-top: 8px;
+    }
+
+    /* ─── CLOSE SLIDE ─── */
+    .slide-close {
+      align-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    .close-headline {
+      font-size: 3.2rem;
+      line-height: 1.1;
+      font-style: italic;
+      color: var(--tierra-light);
+    }
+
+    .close-body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 5.5in;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .close-email {
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--cream);
+      opacity: 0.65;
+    }
+
+    .close-url {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tierra-light);
+      margin-top: 4px;
+      opacity: 0.55;
+    }
+
+    .close-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .close-detail {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.5;
+    }
+
+    /* ─── SCREEN HELPERS ─── */
+    @media screen {
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 24px;
+        background: #3d4a3b;
+      }
+      .slide {
+        box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+        border-radius: 2px;
+      }
+    }
+
+    /* ─── MOBILE RESPONSIVE ─── */
+    @media screen and (max-width: 900px) {
+      body {
+        padding: 12px;
+        gap: 12px;
+      }
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: 100svh;
+        padding: 48px 28px 80px;
+        page-break-after: unset;
+      }
+
+      .slide-cover { padding-top: 48px; padding-bottom: 48px; gap: 32px; }
+      .cover-tagline { font-size: 2.4rem; }
+
+      .slide-content { gap: 24px; }
+      .content-headline { font-size: 1.5rem; max-width: 100%; }
+      .content-body { font-size: 0.82rem; max-width: 100%; }
+      .content-italic { font-size: 0.95rem; max-width: 100%; }
+
+      .stats-row { gap: 28px; flex-wrap: wrap; }
+      .stat-number { font-size: 1.8rem; }
+
+      .grid-3 { grid-template-columns: 1fr; gap: 28px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 28px; }
+      .grid-item h3 { font-size: 1.3rem; }
+
+      .services-grid { grid-template-columns: 1fr; gap: 28px; }
+
+      .values-row { gap: 20px; flex-wrap: wrap; }
+      .values-row span { font-size: 1.1rem; }
+
+      .slide-close { gap: 24px; }
+      .close-headline { font-size: 2.2rem; }
+      .close-body { font-size: 0.9rem; max-width: 100%; }
+
+      .slide-footer {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 1: COVER                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-cover">
+    <div class="cover-top">
+      <svg width="48" height="48" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="14" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+        <ellipse cx="24" cy="46" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+        <ellipse cx="12" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+        <ellipse cx="36" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+        <circle cx="24" cy="30" r="4" fill="#F7F5F1"/>
+      </svg>
+      <span class="cover-wordmark">Blooming</span>
+    </div>
+    <div class="cover-main">
+      <h1 class="display cover-tagline">Alison Granger<br><em>Portfolio</em></h1>
+      <p class="cover-subtitle">Event strategist &amp; ecosystem architect &middot; 10+ years of operating experience</p>
+      <span class="cover-badge">Confidential</span>
+    </div>
+    <div class="slide-footer">
+      <span>Blooming</span>
+      <span>weareblooming.co</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 2: POSITIONING                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Positioning</p>
+    <h2 class="display content-headline">Most events optimize for attendance.<br>Alison optimizes for <em>outcomes.</em></h2>
+    <p class="content-body">Designing curated environments where the right people meet, build, and move the ecosystem forward. 10+ years bridging product, GTM, and developer relations through narrative-driven ecosystem events across AI, developer, and startup ecosystems.</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-number">150+</span>
+        <span class="stat-label">Events architected</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">15k+</span>
+        <span class="stat-label">Builders engaged</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">Years operating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">SF</span>
+        <span class="stat-label">Based &middot; Global reach</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>02</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 3: POINT OF VIEW                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Point of view</p>
+    <h2 class="display content-headline">Why most events <em>fail</em></h2>
+    <div class="grid-3">
+      <div class="grid-item">
+        <span class="grid-number">The problem</span>
+        <h3>Attendance over impact</h3>
+        <p>They optimize for scale when they should optimize for signal. Attendees become a metric, not a curated ecosystem.</p>
+      </div>
+      <div class="grid-item">
+        <span class="grid-number">What creates value</span>
+        <h3>Intentional curation</h3>
+        <p>Proximity to decision-makers and pioneers. Access to unfiltered patterns. Communities built on repeated, high-trust interactions.</p>
+      </div>
+      <div class="grid-item">
+        <span class="grid-number">Why now</span>
+        <h3>AI moves too fast for playbooks</h3>
+        <p>Companies expanding cross-border need ecosystem architecture, not logistics. Someone who understands developer communities, international dynamics, and what moves the needle.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>03</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 4: OPERATING LAYER                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Operating layer</p>
+    <h2 class="display content-headline">Product &times; GTM &times; <em>DevRel</em></h2>
+    <p class="content-body">Across all work—from European festivals and productions to AI ecosystem programs—Alison operates at the intersection of Product, GTM, and Developer Relations. She architects narrative arcs that transform fragmented corporate initiatives into continuous engagement loops. Rather than executing logistics, she designs systems where every developer touchpoint reinforces positioning and builds momentum.</p>
+    <div class="values-row">
+      <span>Narrative design</span>
+      <span class="dot">&middot;</span>
+      <span>Ecosystem strategy</span>
+      <span class="dot">&middot;</span>
+      <span>Community architecture</span>
+      <span class="dot">&middot;</span>
+      <span>Real-world execution</span>
+    </div>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>04</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 5: SELECTED EXPERIENCE               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Selected experience &middot; 2022–2026</p>
+    <h2 class="display content-headline">Building ecosystems at <em>scale</em></h2>
+    <div class="grid-3">
+      <div class="grid-item">
+        <span class="grid-number">01</span>
+        <h3>AI User Group</h3>
+        <p class="timing">Early operator &amp; builder</p>
+        <p>Scaled AIUG from launch through monthly meetups, a 5-city AI engineering workshop tour, and 2 large conferences in SF. From pre-event strategy to post-event storytelling: partner communication, audience engagement, social media amplification, livestream production, and community narratives that extend beyond the room.</p>
+      </div>
+      <div class="grid-item">
+        <span class="grid-number">02</span>
+        <h3>Enterprise AI Activations</h3>
+        <p class="timing">Strategic operator &middot; 2023–2026</p>
+        <p>Operated large-scale ecosystem programs with NVIDIA, Google, IBM, Meta. Designed multi-event series as sustained narrative arcs. Connected product launches, developer education, and community engagement into continuous loops.</p>
+      </div>
+      <div class="grid-item">
+        <span class="grid-number">03</span>
+        <h3>Blooming</h3>
+        <p class="timing">Founder &amp; CEO &middot; 2026</p>
+        <p>Consolidation of 10+ years of operating experience into a strategic layer. Launched with 5 ecosystem events in 60 days across US–LatAm corridors—hackathons, developer meetups, and side events—testing and validating Blooming's model of high-signal curation and ecosystem design.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>05</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 6: PARTNERS                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Partners</p>
+    <h2 class="display content-headline">Trusted by teams building the <em>future</em></h2>
+    <p class="content-body">Strategic event operations and ecosystem programs delivered in partnership with leading technology companies.</p>
+    <div class="partners-grid">
+      <span class="partner-text">Google</span>
+      <span class="partner-text">NVIDIA</span>
+      <span class="partner-text">IBM</span>
+      <span class="partner-text">Miro</span>
+      <span class="partner-text">Intercom</span>
+      <span class="partner-text">Canva</span>
+      <span class="partner-text">DataDog</span>
+      <span class="partner-text">n8n</span>
+      <span class="partner-text">UiPath</span>
+      <span class="partner-text">Pipelex</span>
+      <span class="partner-text">TRAE</span>
+      <span class="partner-text">The AI Collective</span>
+    </div>
+    <p class="partners-note">From developer workshops and conferences to multi-event ecosystem programs across AI and infrastructure.</p>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>06</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 6: CORE SERVICES                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Core services</p>
+    <h2 class="display content-headline">What Blooming <em>delivers</em></h2>
+    <div class="services-grid">
+      <div class="service-block">
+        <h3>Event Strategy &amp; Positioning</h3>
+        <ul>
+          <li>Multi-event series aligned to business objectives</li>
+          <li>Narrative architecture that builds momentum</li>
+          <li>Audience mapping and community segmentation</li>
+        </ul>
+      </div>
+      <div class="service-block">
+        <h3>Community Architecture</h3>
+        <ul>
+          <li>Ecosystem design for new markets and geographies</li>
+          <li>Community lead recruitment and training</li>
+          <li>Curation and signal-to-noise optimization</li>
+        </ul>
+      </div>
+      <div class="service-block">
+        <h3>Full Execution</h3>
+        <ul>
+          <li>End-to-end operations and logistics</li>
+          <li>On-site production and community management</li>
+          <li>Attendee curation and experience design</li>
+        </ul>
+      </div>
+      <div class="service-block">
+        <h3>Ecosystem Programs</h3>
+        <ul>
+          <li>Developer programs and partnerships</li>
+          <li>Sponsorship strategy and partner alignment</li>
+          <li>International expansion programs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>07</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 8: SIGNATURE STRENGTHS               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">Why Alison</p>
+    <h2 class="display content-headline">Signature <em>strengths</em></h2>
+    <div class="grid-3">
+      <div class="grid-item">
+        <span class="grid-number">01</span>
+        <h3>Operational velocity</h3>
+        <p>Moves fast, ships clean. No quality trade-offs. 150+ events = a detailed map of what works and what doesn't.</p>
+      </div>
+      <div class="grid-item">
+        <span class="grid-number">02</span>
+        <h3>Curation over scale</h3>
+        <p>Builds rooms, not crowds. Every attendee adds signal. Understands what moves developers and founders. Thinks in networks.</p>
+      </div>
+      <div class="grid-item">
+        <span class="grid-number">03</span>
+        <h3>Cross-border expertise</h3>
+        <p>Operates across US, Europe, and international geographies with local understanding. Systems thinking that treats events as long-term ecosystem infrastructure.</p>
+      </div>
+    </div>
+    <p class="content-italic" style="margin-top: 8px;">Blooming is built from hands-on operating experience, not consulting theory. It combines executional excellence with narrative design—treating events not as logistics, but as infrastructure for ecosystem growth.</p>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>08</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 9: WHAT BLOOMING IS                  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-content">
+    <p class="uppercase content-label">About Blooming</p>
+    <h2 class="display content-headline">A strategic operating layer for<br><em>cross-border growth</em></h2>
+    <div class="grid-2">
+      <div class="grid-item">
+        <h3>What it is</h3>
+        <p>A strategic operating layer for tech companies expanding across markets, communities, and narratives. It sits between ecosystem strategy, community design, and real-world execution—turning events into structured moments of growth, positioning, and signal.</p>
+      </div>
+      <div class="grid-item">
+        <h3>Who it's for</h3>
+        <p>Series A+ and growth-stage companies operating across borders—especially in AI and developer ecosystems—where traditional events no longer create differentiation or meaningful engagement.</p>
+      </div>
+    </div>
+    <div class="stats-row" style="margin-top: 16px;">
+      <div class="stat-item">
+        <span class="stat-number" style="font-size: 1.1rem; font-style: italic; color: var(--tierra-light);">SF-based</span>
+        <span class="stat-label">with global reach</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" style="font-size: 1.1rem; font-style: italic; color: var(--tierra-light);">Co-founders</span>
+        <span class="stat-label">Andrés (GTM), Nacho (Growth), Claudio (Design)</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Alison Granger &middot; Portfolio</span>
+      <span>09</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SLIDE 10: CLOSE                            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="slide slide-close">
+    <svg width="56" height="56" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="14" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+      <ellipse cx="24" cy="46" rx="5" ry="12" fill="#F7F5F1" fill-opacity="0.7"/>
+      <ellipse cx="12" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+      <ellipse cx="36" cy="30" rx="12" ry="5" fill="#C4B8A8" fill-opacity="0.6"/>
+      <circle cx="24" cy="30" r="4" fill="#F7F5F1"/>
+    </svg>
+    <h2 class="display close-headline">Let's build<br>something together.</h2>
+    <p class="close-body">The best ecosystems aren't planned from a distance—they're built by someone in the room who understands the stakes, the people, and the signal.</p>
+    <div class="close-contact">
+      <span class="close-email">alison@weareblooming.co</span>
+      <span class="close-detail">+33 (0) 6 48 15 53 98</span>
+    </div>
+    <span class="close-url">weareblooming.co</span>
+    <div class="slide-footer">
+      <span>Blooming</span>
+      <span>weareblooming.co</span>
+    </div>
+  </div>
+
+</body>
+</html>
