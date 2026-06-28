@@ -39,10 +39,10 @@ token.json
 *.pptx
 *.docx
 *.p8
-proposals/clients/**/*.pdf
+*.pdf
+brand-assets/
 public/alison-portfolio.html
 public/tagcontrol-brand-options.html
-"Blooming Collective LLC SS4.pdf"
 
 # vercel
 .vercel

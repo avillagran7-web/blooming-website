@@ -5,6 +5,7 @@ export default function ClientsPage() {
       <h1 className="font-display text-4xl font-light text-negro mb-10">Clients</h1>
       <ul className="font-body text-sm text-negro flex flex-col gap-3">
         <li><a href="/dashboard/clients/bako" className="hover:text-bosque transition-colors">Bako →</a></li>
+        <li><a href="/dashboard/clients/cris-safari" className="hover:text-bosque transition-colors">Cris Safari →</a></li>
       </ul>
     </main>
   )
