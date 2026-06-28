@@ -35,6 +35,15 @@ yarn-error.log*
 client_secret*.json
 token.json
 
+# sensitive documents - never commit
+*.pptx
+*.docx
+*.p8
+proposals/clients/**/*.pdf
+public/alison-portfolio.html
+public/tagcontrol-brand-options.html
+"Blooming Collective LLC SS4.pdf"
+
 # vercel
 .vercel
 
