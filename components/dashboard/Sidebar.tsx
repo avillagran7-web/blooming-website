@@ -2,11 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-const clients = [
-  { name: 'Bako', slug: 'bako' },
-  { name: 'Cris Safari', slug: 'cris-safari' },
-]
+import { clients } from '@/data/clients'
 
 function NavItem({ href, label }: { href: string; label: string }) {
   const pathname = usePathname()
