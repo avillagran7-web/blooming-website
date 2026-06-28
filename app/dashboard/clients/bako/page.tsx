@@ -96,6 +96,59 @@ export default function BakoPage() {
         </Link>
       </section>
 
+      {/* Discovery Call Questions */}
+      <section className="mb-14">
+        <h2 className="font-display text-2xl font-light text-negro mb-2">Discovery Call Questions</h2>
+        <p className="font-body text-xs text-hongo mb-6">
+          These arise from gaps, ambiguities, or tensions in the form responses.
+        </p>
+
+        {[
+          {
+            category: 'On the business model',
+            questions: [
+              'What percentage of your revenue comes from Fine Art prints vs. other products? Is there already a low-ticket product, or is that gap confirmed?',
+              'How does your community find you today — is it organic, referrals, content? And what happens after they follow you? Is there any email list or CRM?',
+            ],
+          },
+          {
+            category: 'On the problem',
+            questions: [
+              'You\'ve been facing low conversion for over a year — what have you already tried to fix it? (This was not answered in the form.)',
+              'When you say "ingresos inestables," is the issue that revenue is low, unpredictable, or both? What does a bad month look like vs. a good one?',
+            ],
+          },
+          {
+            category: 'On the vision',
+            questions: [
+              'The goal of internalizing Fine Art printing is significant — is this already planned or still aspirational? What\'s blocking it right now: capital, space, knowledge?',
+              'You define success as "sueldos para el equipo" — how many people are we talking about, and what\'s the monthly number you need to hit to feel stable?',
+            ],
+          },
+          {
+            category: 'On constraints & budget',
+            questions: [
+              'Budget was left blank — what is Bako\'s current capacity to invest in a strategic engagement? Even a range helps Blooming size the proposal correctly.',
+              'Is the external printer dependency a cost problem, a speed problem, or a quality problem? Or all three?',
+            ],
+          },
+        ].map((block, bi) => (
+          <div key={bi} className="mb-7">
+            <p className="font-body text-xs text-bosque uppercase tracking-widest mb-3">{block.category}</p>
+            <div className="flex flex-col gap-2">
+              {block.questions.map((q, qi) => (
+                <div key={qi} className="flex gap-3 bg-white border border-negro/10 px-5 py-4">
+                  <span className="font-body text-hongo text-xs shrink-0 pt-0.5">
+                    {String(qi + 1).padStart(2, '0')}
+                  </span>
+                  <p className="font-body text-sm text-negro leading-relaxed">{q}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
       {/* Next Action */}
       <section className="border-t border-negro/10 pt-8">
         <p className="font-body text-xs text-hongo uppercase tracking-wider mb-2">Next Action</p>

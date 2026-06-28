@@ -96,6 +96,59 @@ export default function CrisSafariPage() {
         </Link>
       </section>
 
+      {/* Discovery Call Questions */}
+      <section className="mb-14">
+        <h2 className="font-display text-2xl font-light text-negro mb-2">Discovery Call Questions</h2>
+        <p className="font-body text-xs text-hongo mb-6">
+          These arise from gaps, ambiguities, or tensions in the form responses.
+        </p>
+
+        {[
+          {
+            category: 'On the business model',
+            questions: [
+              'How does a client typically find you and book a trip? Walk me through the full journey from first contact to confirmed booking.',
+              'What does your current client mix look like — nationalities, age range, group type (couples, families, solo)? Who are your best clients today?',
+            ],
+          },
+          {
+            category: 'On the problem',
+            questions: [
+              'You mentioned needing GTM and ICP clarity — what have you tried so far to define your target customer? Has anything worked partially?',
+              'When you say revenue is unpredictable: is the issue that you don\'t know where the next client will come from, or that the number of bookings per month varies a lot?',
+            ],
+          },
+          {
+            category: 'On the vision',
+            questions: [
+              '"Ser referente en viajes a África" — referent for whom specifically? A geographic market (Chile, LatAm, France)? A type of traveler? Both?',
+              'What would you need to see in 12 months to feel like this engagement with Blooming was worth it?',
+            ],
+          },
+          {
+            category: 'On constraints & budget',
+            questions: [
+              'Budget was not specified — what is Cris Safari\'s current capacity to invest in a strategic engagement? A rough range helps Blooming size the work correctly.',
+              '"No strategic clarity" was the main blocker — have you worked with any consultant or agency before on this? What happened?',
+            ],
+          },
+        ].map((block, bi) => (
+          <div key={bi} className="mb-7">
+            <p className="font-body text-xs text-bosque uppercase tracking-widest mb-3">{block.category}</p>
+            <div className="flex flex-col gap-2">
+              {block.questions.map((q, qi) => (
+                <div key={qi} className="flex gap-3 bg-white border border-negro/10 px-5 py-4">
+                  <span className="font-body text-hongo text-xs shrink-0 pt-0.5">
+                    {String(qi + 1).padStart(2, '0')}
+                  </span>
+                  <p className="font-body text-sm text-negro leading-relaxed">{q}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
       {/* Next Action */}
       <section className="border-t border-negro/10 pt-8">
         <p className="font-body text-xs text-hongo uppercase tracking-wider mb-2">Next Action</p>
