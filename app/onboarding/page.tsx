@@ -111,6 +111,7 @@ export default function Onboarding() {
   const [pwError, setPwError]   = useState(false);
   const [step, setStep]         = useState(1);
   const [done, setDone]         = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // Bloque · Quién eres
   const [bIdName, setBIdName]       = useState("");
@@ -142,6 +143,30 @@ export default function Onboarding() {
   function tryUnlock() {
     if (pw === PASSWORD) { setUnlocked(true); }
     else { setPwError(true); setPw(""); setTimeout(() => setPwError(false), 2000); }
+  }
+
+  async function handleSubmit() {
+    setSubmitting(true)
+    try {
+      await fetch('/api/onboarding', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: bIdName, company: bIdCompany, role: bIdRole,
+          businessModel: b0Model, revenueTrend: b0Trend, clients: b0Clients,
+          bottleneck: b1Locator, problem: b1Problem, timeWithProblem: b1Time,
+          vision: b2Vision, priorities: b2Priority,
+          motivation: b3Motivation, involvement: b3Involvement,
+          commitment: b3Commitment, hoursPerWeek: b3Hours,
+          budget: b3Budget, links: b3Links,
+        }),
+      })
+    } catch (e) {
+      console.error('Submit error:', e)
+    } finally {
+      setSubmitting(false)
+      setDone(true)
+    }
   }
 
   const input: React.CSSProperties = {
@@ -442,13 +467,16 @@ export default function Onboarding() {
             }}
           >← Volver</button>
           <button
-            onClick={() => step < 5 ? setStep(s => s + 1) : setDone(true)}
+            onClick={() => step < 5 ? setStep(s => s + 1) : handleSubmit()}
+            disabled={submitting}
             style={{
               fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.72rem", fontWeight: 400,
               letterSpacing: "0.22em", textTransform: "uppercase", color: "#FAF8F3",
-              background: "#1A1A1A", border: "none", padding: "13px 36px", cursor: "pointer",
+              background: "#1A1A1A", border: "none", padding: "13px 36px",
+              cursor: submitting ? "default" : "pointer",
+              opacity: submitting ? 0.6 : 1,
             }}
-          >{step < 4 ? "Continuar →" : "Enviar →"}</button>
+          >{step < 5 ? "Continuar →" : submitting ? "Enviando..." : "Enviar →"}</button>
         </div>
 
       </div>
