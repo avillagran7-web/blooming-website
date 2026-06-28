@@ -40,9 +40,9 @@ export default function DiagnosticReport({
   recommendation,
 }: DiagnosticReportProps) {
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="bg-cream">
       {/* Header */}
-      <div className="border-b border-negro/10 px-8 py-10 max-w-4xl mx-auto">
+      <div className="border-b border-negro/10 px-10 py-10 max-w-3xl">
         <p className="font-body text-xs tracking-widest text-hongo uppercase mb-1">
           Blooming — Pre-Discovery Diagnostic
         </p>
@@ -54,7 +54,7 @@ export default function DiagnosticReport({
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-8 py-12 flex flex-col gap-16">
+      <div className="max-w-3xl px-10 py-12 flex flex-col gap-16">
 
         {/* Sections */}
         {sections.map((section, i) => (

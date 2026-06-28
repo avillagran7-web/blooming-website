@@ -29,10 +29,10 @@ const statusColors: Record<string, string> = {
 
 export default function ClientsPage() {
   return (
-    <main className="min-h-screen bg-cream px-8 py-12 max-w-4xl mx-auto">
+    <main className="px-10 py-12 max-w-3xl">
       <div className="flex items-baseline justify-between mb-10">
         <div>
-          <p className="font-body text-xs tracking-widest text-hongo uppercase mb-1">Dashboard</p>
+          <p className="font-body text-xs tracking-widest text-hongo uppercase mb-1">Overview</p>
           <h1 className="font-display text-4xl font-light text-negro">Clients</h1>
         </div>
         <p className="font-body text-xs text-hongo">{clients.length} active</p>

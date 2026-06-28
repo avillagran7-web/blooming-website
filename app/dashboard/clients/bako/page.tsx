@@ -20,12 +20,10 @@ const formResponses = {
 
 export default function BakoPage() {
   return (
-    <main className="min-h-screen bg-cream px-8 py-12 max-w-4xl mx-auto">
+    <main className="px-10 py-12 max-w-3xl">
 
       {/* Breadcrumb */}
       <p className="font-body text-xs tracking-widest text-hongo uppercase mb-8">
-        <Link href="/dashboard" className="hover:text-bosque transition-colors">Dashboard</Link>
-        {' / '}
         <Link href="/dashboard/clients" className="hover:text-bosque transition-colors">Clients</Link>
         {' / '}Bako
       </p>
