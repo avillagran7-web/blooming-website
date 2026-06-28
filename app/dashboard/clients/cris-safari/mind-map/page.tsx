@@ -1,36 +1,66 @@
-export default function CrisSafariMindMap() {
- return (
- <main className="min-h-screen bg-cream px-8 py-12 max-w-5xl mx-auto">
-   <div className="mb-10">
-     <p className="font-body text-xs tracking-widest text-hongo uppercase mb-2">Cris Safari</p>
-     <h1 className="font-display text-4xl font-light text-negro">Strategic Mind Map</h1>
-   </div>
+import DiagnosticReport from '@/components/diagnostic/DiagnosticReport'
 
-   <svg viewBox="0 0 800 500" className="w-full h-auto bg-white rounded-xl shadow-lg p-4">
-     <circle cx="400" cy="250" r="60" fill="#e6f3ff" stroke="#4a4a4a" strokeWidth="2"/>
-     <text x="400" y="255" textAnchor="middle" className="font-bold text-lg">CRIS SAFARI</text>
-
-     <line x1="400" y1="250" x2="150" y2="100" stroke="#999" strokeWidth="2"/>
-     <rect x="50" y="70" width="200" height="60" fill="#fff" stroke="#4a4a4a" rx="10"/>
-     <text x="150" y="105" textAnchor="middle" className="font-bold">1. Situación Actual</text>
-     
-     <line x1="400" y1="250" x2="650" y2="100" stroke="#999" strokeWidth="2"/>
-     <rect x="550" y="70" width="200" height="60" fill="#fff" stroke="#4a4a4a" rx="10"/>
-     <text x="650" y="105" textAnchor="middle" className="font-bold">2. Diagnóstico</text>
-
-     <line x1="400" y1="250" x2="150" y2="400" stroke="#999" strokeWidth="2"/>
-     <rect x="50" y="370" width="200" height="60" fill="#fff" stroke="#4a4a4a" rx="10"/>
-     <text x="150" y="405" textAnchor="middle" className="font-bold">3. Visión</text>
-
-     <line x1="400" y1="250" x2="650" y2="400" stroke="#999" strokeWidth="2"/>
-     <rect x="550" y="370" width="200" height="60" fill="#fff" stroke="#4a4a4a" rx="10"/>
-     <text x="650" y="405" textAnchor="middle" className="font-bold">4. Prioridades</text>
-
-     <text x="150" y="130" textAnchor="middle" fontSize="12">Agencia de viajes</text>
-     <text x="650" y="130" textAnchor="middle" fontSize="12">Necesita definir cliente ideal</text>
-     <text x="150" y="430" textAnchor="middle" fontSize="12">Referente en õfrica</text>
-     <text x="650" y="430" textAnchor="middle" fontSize="12">Go-to-market y Revenue</text>
-   </svg>
- </main>
- )
+export default function CrisSafariDiagnostic() {
+  return (
+    <DiagnosticReport
+      client="Cris Safari"
+      date="June 2026"
+      tagline="Travel agency. Needs to define ideal client and go-to-market."
+      sections={[
+        {
+          label: 'The Gap',
+          framework: 'Keenan / Gap Selling',
+          signal: 'Gap is partially visible: GTM and ideal client definition are missing. Discovery call should probe how long this has been unclear and what has been attempted.',
+          items: [
+            'Current state: Travel agency with product and operations. Positioned around Africa experiences.',
+            'Desired state: Clear ideal client profile, predictable revenue, recognized referent in the Africa travel space.',
+            'The gap: No clear customer definition = no focused acquisition strategy = unpredictable revenue.',
+            'What they\'ve tried: To be confirmed in discovery call — critical to avoid recommending already-tested paths.',
+          ],
+        },
+        {
+          label: 'Growth Model',
+          framework: 'Reforge + Elena Verna',
+          signal: 'This is a GTM architecture problem. Product exists. The distribution and targeting layer is missing.',
+          items: [
+            'Growth type: Go-to-market + positioning. Not an awareness problem — a focus and targeting problem.',
+            'Key signal: No ideal client definition means the acquisition loop cannot be built. Every marketing effort becomes generic.',
+            'Premature scaling risk: Medium. Running paid or community channels without ICP clarity will burn budget.',
+            'Elena Verna lens: Need to identify which customer segment has the highest natural retention — that is the real ICP.',
+          ],
+        },
+        {
+          label: 'Character & Stakes',
+          framework: 'Donald Miller / StoryBrand',
+          signal: 'Africa positioning is a strong narrative asset. The story exists — it needs to be aimed at a specific character.',
+          items: [
+            'The character: A founder with deep product knowledge and a clear geographic niche — Africa travel.',
+            'What winning looks like: Being the undisputed referent for Africa experiences in their target market.',
+            'The villain: Generic positioning that speaks to everyone and converts no one.',
+            'Success metric: Likely a mix of revenue target and positioning goal — confirm in discovery call.',
+          ],
+        },
+        {
+          label: 'Constraint Map',
+          framework: "Lenny's Newsletter — PMF & Retention lens",
+          signal: 'Strategic clarity is the primary constraint — which is exactly what Blooming solves. High fit signal.',
+          items: [
+            'Primary constraint: No strategic clarity on ICP and GTM — this maps directly to Blooming\'s core offering.',
+            'Secondary constraint: Revenue predictability — likely follows from solving the ICP problem.',
+            'Budget signal: To be confirmed in discovery call.',
+            'Timing: Right. The product is mature enough to define a target customer.',
+          ],
+        },
+      ]}
+      fit={[
+        { dimension: 'Gap Clarity', value: 'Partial — ICP and GTM undefined', level: 'medium' },
+        { dimension: 'Growth Type', value: 'GTM architecture + positioning', level: 'neutral' },
+        { dimension: 'Winning Definition', value: 'Referent in Africa travel', level: 'neutral' },
+        { dimension: 'Constraint Type', value: 'Strategic clarity', level: 'neutral' },
+        { dimension: 'Premature Scaling Risk', value: 'Medium — no ICP yet', level: 'medium' },
+        { dimension: 'Blooming Fit', value: 'High', level: 'high' },
+      ]}
+      recommendation="Cris Safari has product and geographic niche — two strong assets. The missing piece is customer definition. Blooming's role is to run an ICP workshop, define the acquisition narrative, and build the first go-to-market motion. Discovery call should validate budget intent and uncover what's been tried so far in terms of targeting."
+    />
+  )
 }
