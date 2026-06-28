@@ -6,6 +6,7 @@ export default function CrisSafariDiagnostic() {
       client="Cris Safari"
       date="June 2026"
       tagline="Travel agency. Needs to define ideal client and go-to-market."
+      businessModel="High-ticket travel experiences (Africa safaris). Revenue per transaction is large, volume is low. Business depends on trust, referrals, and repeat clients. Acquisition cost is high if targeting is wrong."
       sections={[
         {
           label: 'The Gap',
@@ -60,6 +61,7 @@ export default function CrisSafariDiagnostic() {
         { dimension: 'Premature Scaling Risk', value: 'Medium — no ICP yet', level: 'medium' },
         { dimension: 'Blooming Fit', value: 'High', level: 'high' },
       ]}
+      priorityProblem="No ICP definition. Without knowing exactly who the ideal client is, every marketing action is scatter-shot. Running ads, content, or referral programs before defining ICP wastes budget and time Blooming doesn't have."
       recommendation="Cris Safari has product and geographic niche — two strong assets. The missing piece is customer definition. Blooming's role is to run an ICP workshop, define the acquisition narrative, and build the first go-to-market motion. Discovery call should validate budget intent and uncover what's been tried so far in terms of targeting."
     />
   )

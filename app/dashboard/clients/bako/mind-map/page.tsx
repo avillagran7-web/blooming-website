@@ -6,6 +6,7 @@ export default function BakoDiagnostic() {
       client="Bako"
       date="June 2026"
       tagline="Design studio & community. High reach, low conversion."
+      businessModel="Product sales (Fine Art prints, stickers, postales) + community/content. Revenue is product-dependent, not subscription. Growth comes from converting existing audience, not acquiring new one."
       sections={[
         {
           label: 'The Gap',
@@ -64,6 +65,7 @@ export default function BakoDiagnostic() {
         { dimension: 'Premature Scaling Risk', value: 'Low', level: 'high' },
         { dimension: 'Blooming Fit', value: 'High', level: 'high' },
       ]}
+      priorityProblem="No low-ticket entry product. The gap between free community content and Fine Art prints is too large. Bako needs a $10–$30 product that converts community members into buyers before asking them to spend $200+."
       recommendation="Bako has the brand, the community, and the vision. What's missing is the revenue architecture. Blooming's role is to design the conversion layer — low-ticket entry products, simplified logistics, and a monetization loop that matches the community they've built. Discovery call should focus on budget reality and timeline for Fine Art equipment investment."
     />
   )

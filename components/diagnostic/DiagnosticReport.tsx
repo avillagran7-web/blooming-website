@@ -15,8 +15,10 @@ interface DiagnosticReportProps {
   client: string
   date: string
   tagline: string
+  businessModel: string
   sections: Section[]
   fit: FitRow[]
+  priorityProblem: string
   recommendation: string
 }
 
@@ -31,8 +33,10 @@ export default function DiagnosticReport({
   client,
   date,
   tagline,
+  businessModel,
   sections,
   fit,
+  priorityProblem,
   recommendation,
 }: DiagnosticReportProps) {
   return (
@@ -44,6 +48,10 @@ export default function DiagnosticReport({
         </p>
         <h1 className="font-display text-5xl font-light text-negro mb-2">{client}</h1>
         <p className="font-body text-sm text-hongo">{date} · {tagline}</p>
+        <div className="mt-5 pt-5 border-t border-negro/10">
+          <p className="font-body text-xs text-hongo uppercase tracking-wider mb-1">Business Model</p>
+          <p className="font-body text-sm text-negro">{businessModel}</p>
+        </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-8 py-12 flex flex-col gap-16">
@@ -105,6 +113,16 @@ export default function DiagnosticReport({
               </div>
             ))}
           </div>
+        </section>
+
+        {/* Priority Problem */}
+        <section className="bg-negro px-8 py-8">
+          <p className="font-body text-xs tracking-widest text-cream/50 uppercase mb-4">
+            Priority Problem — Attack This First
+          </p>
+          <p className="font-display text-2xl font-light text-cream leading-relaxed">
+            {priorityProblem}
+          </p>
         </section>
 
         {/* Recommendation */}
