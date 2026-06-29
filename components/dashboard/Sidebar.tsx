@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { clients } from '@/data/clients'
+import { clients } from '@/lib/clients'
 
 function NavItem({ href, label }: { href: string; label: string }) {
   const pathname = usePathname()

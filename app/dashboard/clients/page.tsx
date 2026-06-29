@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { clients, STAGE_KEYS, STAGE_LABELS } from '@/data/clients'
+import { clients, STAGE_KEYS, STAGE_LABELS } from '@/lib/clients'
 
 const signalBorder: Record<string, string> = {
   high: 'border-l-bosque',

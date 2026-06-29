@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { clients, getClient, STAGE_KEYS, STAGE_LABELS } from '@/data/clients'
+import { clients, getClient, STAGE_KEYS, STAGE_LABELS } from '@/lib/clients'
 import ClientTabs from '@/components/dashboard/ClientTabs'
 
 export function generateStaticParams() {

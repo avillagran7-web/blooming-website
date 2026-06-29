@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import DiagnosticReport from '@/components/diagnostic/DiagnosticReport'
-import type { ClientData } from '@/data/clients'
+import type { ClientData } from '@/lib/clients'
 
 type Tab = 'overview' | 'form' | 'diagnostic' | 'questions'
 
